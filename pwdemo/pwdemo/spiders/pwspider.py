@@ -5,12 +5,15 @@ from dateutil import parser
 
 film = 'thor:'
 
+urlbms = 'https://in.bookmyshow.com/buytickets/carnival-downtown-thalassery/cinema-thay-CDTH-MT/20220711'
+urltk = 'https://www.ticketnew.com/INOX-Atria-Mall-Worli-Mumbai-Book-My-Movie-Show-Tickets/Online-Ticket-Booking/12319/20220712'
+
 class tkSpider(scrapy.Spider):
     name = 'tk'
     
     def start_requests(self):
         yield scrapy.Request(
-            url='https://www.ticketnew.com/INOX-Atria-Mall-Worli-Mumbai-Book-My-Movie-Show-Tickets/Online-Ticket-Booking/12319/20220712', 
+            url=urltk, 
             meta=dict(
                 playwright=True,
                 playwright_include_page=True,
@@ -41,7 +44,7 @@ class bmsSpider(scrapy.Spider):
 
     def start_requests(self):
         yield scrapy.Request(
-            url='https://in.bookmyshow.com/buytickets/carnival-downtown-thalassery/cinema-thay-CDTH-MT/20220711', 
+            url= urlbms, 
             meta=dict(
                 playwright=True,
                 playwright_include_page=True,
