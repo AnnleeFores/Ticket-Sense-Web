@@ -5,7 +5,7 @@ from dateutil import parser
 
 
 film = 'thor:'
-date = "2020-07-12"
+date = "2020-07-10"
 
 urlbms = 'https://in.bookmyshow.com/buytickets/carnival-downtown-thalassery/cinema-thay-CDTH-MT/20220710'
 urltk = 'https://www.ticketnew.com/INOX-Atria-Mall-Worli-Mumbai-Book-My-Movie-Show-Tickets/Online-Ticket-Booking/12319/20220712'
