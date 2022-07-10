@@ -127,3 +127,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+ticketsenseweb/ticketsense/migrations/0001_initial.py
+ticketsenseweb/ticketsense/migrations/0002_trigger.py
