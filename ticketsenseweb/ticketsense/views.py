@@ -39,7 +39,7 @@ def index(request):
 
     return Response(routes)
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def trigger(request):
     trigger = Trigger.objects.all()
     serializer = TriggerSerializer(trigger, many=True)
