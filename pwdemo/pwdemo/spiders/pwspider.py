@@ -1,22 +1,21 @@
-from fileinput import filename
-from requests import request
 import scrapy
-from scrapy_playwright.page import PageCoroutine
+from scrapy_playwright.page import PageMethod
 
-film = 'love'
+film = 'elvis'
 
 class PwspiderSpider(scrapy.Spider):
     name = 'pwspider'
     
     def start_requests(self):
-        yield scrapy.Request('https://www.ticketnew.com/INOX-Atria-Mall-Worli-Mumbai-Book-My-Movie-Show-Tickets/Online-Ticket-Booking/12319/20220710', 
-        meta=dict(
-            playwright = True,
-            playwright_include_page = True,
-            playwright_page_coroutines = [
-                PageCoroutine('wait_for_selector', 'div.tn-entity-details')
-            ]
-        ))
+        yield scrapy.Request(
+            url='https://www.ticketnew.com/INOX-Atria-Mall-Worli-Mumbai-Book-My-Movie-Show-Tickets/Online-Ticket-Booking/12319/20220712', 
+            meta=dict(
+                playwright=True,
+                playwright_include_page=True,
+                playwright_page_methods=[
+                    PageMethod('wait_for_selector', 'div.tn-entity-details')
+                ]
+            ))
 
     async def parse(self, response):
         ## if date booking is active get the details
