@@ -3,9 +3,11 @@ from scrapy_playwright.page import PageMethod
 from dateutil import parser
 
 
-film = 'thor:'
 
-urlbms = 'https://in.bookmyshow.com/buytickets/carnival-downtown-thalassery/cinema-thay-CDTH-MT/20220711'
+film = 'thor:'
+date = "2020-07-12"
+
+urlbms = 'https://in.bookmyshow.com/buytickets/carnival-downtown-thalassery/cinema-thay-CDTH-MT/20220710'
 urltk = 'https://www.ticketnew.com/INOX-Atria-Mall-Worli-Mumbai-Book-My-Movie-Show-Tickets/Online-Ticket-Booking/12319/20220712'
 
 class tkSpider(scrapy.Spider):
@@ -28,16 +30,19 @@ class tkSpider(scrapy.Spider):
 
         if active != None:
             venuehtml =  response.css('div#divTheatreInfo')
-            date = response.xpath('//*[@id="hdnpagecreated"]/@value').get()
-            DT = parser.parse(date)
+            DT = (parser.parse(date)).strftime('%Y-%m-%d')
             for show in response.css('div.tn-entity-details')[1:]:
                 showname = show.css('h5::text').get()
                 if film in showname.lower():
                     yield {
                         'venue' : venuehtml.css('h2::text').get(),
                         'show' : showname,
-                        'date' : DT.strftime('%Y-%m-%d'),
+                        'date' : DT,
                     }
+        else:
+            yield {
+                'data' : None
+            }
 
 class bmsSpider(scrapy.Spider):
     name = 'bms'
@@ -63,14 +68,17 @@ class bmsSpider(scrapy.Spider):
             date_numeric = response.css('div.date-numeric::text').get()
             date_month = response.css('div.date-month::text').get()
 
-            DT = parser.parse(f'{date_month} {date_numeric} 2020')
-
-            for show in response.css('a.nameSpan'):
-                showname = show.css('a::text').get()
-                if film in showname.lower():
-                    yield {
-                        'venue' : venuehtml.css('a::text').get(),
-                        'show' : showname,
-                        'date' : DT.strftime('%Y-%m-%d'),
-                    }
-
+            DT = (parser.parse(f'{date_month} {date_numeric} 2020')).strftime('%Y-%m-%d')
+            if DT == date:
+                for show in response.css('a.nameSpan'):
+                    showname = show.css('a::text').get()
+                    if film in showname.lower():
+                        yield {
+                            'venue' : venuehtml.css('a::text').get(),
+                            'show' : showname,
+                            'date' : DT,
+                        }
+            else:
+                yield {
+                    'data' : None
+                }
