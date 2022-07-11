@@ -1,5 +1,4 @@
 from django.shortcuts import render
-import requests
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Trigger
@@ -36,9 +35,8 @@ def index(request):
             'description': 'Deletes trigger'
         },
     ]
-    response = (requests.get('http://127.0.0.1:9080/crawl.json?spider_name=tk&start_requests=true&crawl_args={"link":"Liberty-Paradise-Complex--Thalassery-Book-My-Movie-Show-Tickets/Online-Ticket-Booking/1203/20220711","film":"thor","date":"2020-07-11"}').json())
-    data = response['items'][0]
-    print(data)
+
+    
     return Response(routes)
 
 @api_view(['GET'])

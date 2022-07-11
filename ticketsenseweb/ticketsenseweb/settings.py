@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    # 'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -83,6 +84,11 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = 'ticketsense.User'
+
+#cronjobs
+# CRONJOBS = [
+#     ('*/1 * * * *', 'ticketsense.cron.my_scheduled_job'), #run every 1 minute
+# ]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
