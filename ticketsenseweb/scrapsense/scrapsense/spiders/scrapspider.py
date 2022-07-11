@@ -3,15 +3,15 @@ from scrapy_playwright.page import PageMethod
 from dateutil import parser
 
 
-
-film = 'love'
-date = "2020-07-11"
-
+# playwright integration for js website  Note: Make sure to edit settings.py to include playwright
+# spider for ticketnew website
 class tkSpider(scrapy.Spider):
     name = 'tk'
+    
     def start_requests(self):
+        
         yield scrapy.Request(
-            url=f'https://www.ticketnew.com/{self.argu}',
+            url=f'https://www.ticketnew.com/{self.link}',
             meta=dict(
                 playwright=True,
                 playwright_include_page=True,
@@ -21,9 +21,15 @@ class tkSpider(scrapy.Spider):
             ))
 
     async def parse(self, response):
+
+        # values accessed from get url
+        film = self.film
+        date = self.date
+
         ## if date booking is active get the details
         active = response.css('li.ui-tabs-tab.ui-corner-top.ui-state-default.ui-tab.ui-tabs-active.ui-state-active').get()
 
+        # logic to check and retrive only the needed data in json format
         if active != None:
             venuehtml =  response.css('div#divTheatreInfo')
             DT = (parser.parse(date)).strftime('%Y-%m-%d')
@@ -35,17 +41,18 @@ class tkSpider(scrapy.Spider):
                         'show' : showname,
                         'date' : DT,
                     }
-        else:
+        else: 
             yield {
-                'data' : None
+                None
             }
 
+# spider for bookmyshow website
 class bmsSpider(scrapy.Spider):
     name = 'bms'
 
     def start_requests(self):
         yield scrapy.Request(
-            url=f'https://in.bookmyshow.com/buytickets/{self.argu}',
+            url=f'https://in.bookmyshow.com/buytickets/{self.link}',
             meta=dict(
                 playwright=True,
                 playwright_include_page=True,
@@ -55,6 +62,10 @@ class bmsSpider(scrapy.Spider):
             ))
 
     async def parse(self, response):
+
+        film = self.film
+        date = self.date
+
         ## if date booking is active get the details
         active = response.css('li.slick-current').get()
 
@@ -76,5 +87,5 @@ class bmsSpider(scrapy.Spider):
                         }
             else:
                 yield {
-                    'data' : None
+                    None
                 }
