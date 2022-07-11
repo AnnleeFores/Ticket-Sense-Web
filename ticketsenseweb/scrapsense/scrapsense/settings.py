@@ -12,6 +12,14 @@ BOT_NAME = 'scrapsense'
 SPIDER_MODULES = ['scrapsense.spiders']
 NEWSPIDER_MODULE = 'scrapsense.spiders'
 
+# playwright
+
+DOWNLOAD_HANDLERS = {
+    "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+    "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+}
+
+TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'scrapsense (+http://www.yourdomain.com)'

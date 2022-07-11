@@ -4,17 +4,14 @@ from dateutil import parser
 
 
 
-film = 'thor:'
+film = 'love'
 date = "2020-07-11"
-
-# urlbms = 'https://in.bookmyshow.com/buytickets/carnival-downtown-thalassery/cinema-thay-CDTH-MT/20220711'
-# urltk = 'https://www.ticketnew.com/INOX-Atria-Mall-Worli-Mumbai-Book-My-Movie-Show-Tickets/Online-Ticket-Booking/12319/20220712'
 
 class tkSpider(scrapy.Spider):
     name = 'tk'
-    
     def start_requests(self):
         yield scrapy.Request(
+            url=f'https://www.ticketnew.com/{self.argu}',
             meta=dict(
                 playwright=True,
                 playwright_include_page=True,
@@ -48,7 +45,7 @@ class bmsSpider(scrapy.Spider):
 
     def start_requests(self):
         yield scrapy.Request(
-
+            url=f'https://in.bookmyshow.com/buytickets/{self.argu}',
             meta=dict(
                 playwright=True,
                 playwright_include_page=True,
