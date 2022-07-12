@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from .models import Trigger
 from .serializers import TriggerSerializer
 
-from .tasks import sleepy
+from .tasks import thirty_second_func
 
 # Create your views here.
 @api_view(['GET'])
@@ -38,7 +38,8 @@ def index(request):
             'description': 'Deletes trigger'
         },
     ]
-    sleepy.delay(10)
+    
+    thirty_second_func.delay()
     
     return Response(routes)
 
