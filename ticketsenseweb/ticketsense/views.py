@@ -1,8 +1,11 @@
+import imp
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Trigger
 from .serializers import TriggerSerializer
+
+from .tasks import sleepy
 
 # Create your views here.
 @api_view(['GET'])
@@ -35,7 +38,7 @@ def index(request):
             'description': 'Deletes trigger'
         },
     ]
-
+    sleepy.delay(10)
     
     return Response(routes)
 
