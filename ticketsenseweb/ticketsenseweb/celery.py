@@ -15,6 +15,7 @@ app = Celery('ticketsenseweb')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
 app.conf.timezone = 'Asia/Kolkata'
+
  
 app.conf.beat_schedule = {
     "ticketsensebgtask": {
