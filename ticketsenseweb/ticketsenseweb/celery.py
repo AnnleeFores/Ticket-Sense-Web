@@ -17,8 +17,8 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.conf.timezone = 'Asia/Kolkata'
  
 app.conf.beat_schedule = {
-    "every_thirty_seconds": {
-        "task": "ticketsense.tasks.thirty_second_func",
+    "ticketsensebgtask": {
+        "task": "ticketsense.tasks.five_min_func",
         "schedule": timedelta(seconds=60),
     },
 }

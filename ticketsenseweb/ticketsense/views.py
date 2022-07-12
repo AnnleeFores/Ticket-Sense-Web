@@ -3,8 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Trigger
 from .serializers import TriggerSerializer
-from .bgtask import my_scheduled_job
-from .tasks import thirty_second_func
+from .tasks import five_min_func
 
 # Create your views here.
 @api_view(['GET'])
