@@ -1,10 +1,9 @@
-import imp
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Trigger
 from .serializers import TriggerSerializer
-
+from .bgtask import my_scheduled_job
 from .tasks import thirty_second_func
 
 # Create your views here.
@@ -39,7 +38,6 @@ def index(request):
         },
     ]
     
-    thirty_second_func.delay()
     
     return Response(routes)
 
