@@ -78,9 +78,9 @@ def fetch(link, filmkeyword, date, site, pk, USER_ID):
             date = (parser.parse(i['date'])).strftime('%d-%m-%Y')
 
             if site == 'bms':
-                link = f'https://in.bookmyshow.com/buytickets/{link}'
+                websitelink = f'https://in.bookmyshow.com/buytickets/{link}'
             else:
-                link = f'https://www.ticketnew.com/{link}'
+                websitelink = f'https://www.ticketnew.com/{link}'
 
             #* * to make text bold for telegram based on markdown parsing
             msg = f""" *Ticket Sense* found ticket booking for:
@@ -91,7 +91,7 @@ def fetch(link, filmkeyword, date, site, pk, USER_ID):
 
 🗓️ *{date}*
 
-Link: *{link}* """  
+Link: *{websitelink}* """  
 
             message.delay(msg, pk, USER_ID)
 
