@@ -87,11 +87,11 @@ def fetch(link, filmkeyword, date, site, pk, USER_ID):
 
 *{film}*
             
-📍 *{venue}*
+📍 {venue}
 
-🗓️ *{date}*
+🗓️ {date}
 
-Link: *{websitelink}* """  
+Link: {websitelink} """  
 
             message.delay(msg, pk, USER_ID)
 
