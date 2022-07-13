@@ -23,12 +23,12 @@ load_dotenv()
 # assigns value collected from .env to variables
 API_KEY_TEST = os.getenv('API_KEY_TEST')
 API_KEY = os.getenv('API_KEY')
-USER_ID = os.getenv('USER_ID')
+
 
 # code to initialize telegram bot function
 bot = telebot.TeleBot(API_KEY)
 @shared_task(ignore_result=True)
-def message(msg, pk):
+def message(msg, pk, USER_ID):
     # trigger = Trigger.objects.get(id=pk)
     # trigger.delete()
     bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
@@ -37,9 +37,9 @@ def message(msg, pk):
     #     sleep(60)
     
 
-testbot = telebot.TeleBot(API_KEY_TEST)
-def testmessage(msg):
-    testbot.send_message(USER_ID, msg)
+# testbot = telebot.TeleBot(API_KEY_TEST)
+# def testmessage(msg):
+#     testbot.send_message(USER_ID, msg)
 
     
 @shared_task(ignore_result=True)
@@ -54,14 +54,15 @@ def five_min_func():
             filmkeyword = trigger.film
             date = (trigger.date).strftime('%Y-%m-%d')
             site = trigger.site
-            fetch.delay(link, filmkeyword, date, site, pk)
+            USER_ID = trigger.tg_user_id
+            fetch.delay(link, filmkeyword, date, site, pk, USER_ID)
     except:
         pass
 
         
 
 @shared_task(ignore_result=True)
-def fetch(link, filmkeyword, date, site, pk):
+def fetch(link, filmkeyword, date, site, pk, USER_ID):
     
     response = (requests.get(f'http://127.0.0.1:9080/crawl.json?spider_name={site}&start_requests=true&crawl_args={{"link":"{link}","film":"{filmkeyword}","date":"{date}"}}').json())
     try:
@@ -92,6 +93,6 @@ def fetch(link, filmkeyword, date, site, pk):
 
 Link: *{link}* """  
 
-            message.delay(msg, pk)
+            message.delay(msg, pk, USER_ID)
 
     return 'done'
