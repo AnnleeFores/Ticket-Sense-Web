@@ -72,12 +72,10 @@ class bmsSpider(scrapy.Spider):
         if active != None:
             venuehtml =  response.css('a.venue-heading')
 
-            date_numeric = response.css('div.date-numeric::text').get()
-            date_month = response.css('div.date-month::text').get()
+            date_numeric = response.css('li.date-details.slick-slide.slick-current.slick-active > a > div.date-numeric::text').get()
+            date_month = response.css('li.date-details.slick-slide.slick-current.slick-active > a > div.date-month::text').get()
 
             DT = (parser.parse(f'{date_month} {date_numeric} 2022')).strftime('%Y-%m-%d')
-            print(DT)
-            print(date)
             if DT == date:
                 for show in response.css('a.nameSpan'):
                     showname = show.css('a::text').get()

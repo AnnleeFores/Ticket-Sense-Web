@@ -3,6 +3,7 @@ from celery import shared_task
 from celery.utils.log import get_task_logger
 import requests
 from .models import Trigger
+from dateutil import parser
 
 # os module used for getting env variables
 import os
@@ -28,11 +29,12 @@ USER_ID = os.getenv('USER_ID')
 bot = telebot.TeleBot(API_KEY)
 @shared_task(ignore_result=True)
 def message(msg, pk):
-    trigger = Trigger.objects.get(id=pk)
-    trigger.delete()
-    for i in range(3):
-        bot.send_message(USER_ID, msg)
-        sleep(60)
+    # trigger = Trigger.objects.get(id=pk)
+    # trigger.delete()
+    bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
+    # for i in range(3):
+    #     bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
+    #     sleep(60)
     
 
 testbot = telebot.TeleBot(API_KEY_TEST)
@@ -70,5 +72,26 @@ def fetch(link, filmkeyword, date, site, pk):
     logger.info(data)
     if data != []:
         for i in data:
-            message.delay(f'telegram working {i}', pk)
+            film = i['show']
+            venue = i['venue']
+            date = (parser.parse(i['date'])).strftime('%d-%m-%Y')
+
+            if site == 'bms':
+                link = f'https://in.bookmyshow.com/buytickets/{link}'
+            else:
+                link = f'https://www.ticketnew.com/{link}'
+
+            #* * to make text bold for telegram based on markdown parsing
+            msg = f""" *Ticket Sense* found ticket booking for:
+
+*{film}*
+            
+📍 *{venue}*
+
+🗓️ *{date}*
+
+Link: *{link}* """  
+
+            message.delay(msg, pk)
+
     return 'done'
