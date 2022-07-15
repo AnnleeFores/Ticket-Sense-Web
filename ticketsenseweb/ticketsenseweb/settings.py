@@ -42,26 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_celery_beat',
 
-    # The following apps are for django allauth
-    'django.contrib.sites',
 
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-
-    # login platforms
-    # 'allauth.socialaccount.providers.github',
-    # 'allauth.socialaccount.providers.google',
-    # 'allauth.socialaccount.providers.telegram',
 ]
-
-# django all auth
-SITE_ID = 1
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = True
 
 
 MIDDLEWARE = [
@@ -79,7 +61,7 @@ ROOT_URLCONF = 'ticketsenseweb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -107,10 +89,6 @@ DATABASES = {
 
 AUTH_USER_MODEL = 'ticketsense.User'
 
-#cronjobs
-# CRONJOBS = [
-#     ('*/1 * * * *', 'ticketsense.cron.my_scheduled_job'), #run every 1 minute
-# ]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -128,15 +106,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
-]
-
-# Django allauth
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 

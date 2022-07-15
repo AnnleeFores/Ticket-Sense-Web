@@ -49,6 +49,7 @@ def index(request):
     
     
     return Response(routes)
+    # return render(request, 'ticketsense/index.html')
 
 @api_view(['GET'])
 def trigger(request):
