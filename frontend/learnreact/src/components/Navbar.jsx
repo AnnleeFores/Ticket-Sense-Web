@@ -20,9 +20,9 @@ const Navbar = () => {
         </ul>
         <div onClick={handleNav} className='block md:hidden'>
         {/* if else in js form inside react */}
-            {!nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20}/>} 
+            {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20}/>} 
         </div>
-        <div className={!nav ? 'fixed left-0 top-0 h-full w-[60%] border-r-gray-900 bg-[#000300] ease-in-out duration-500' : 'fixed left-[-100%] top-0 h-full w-[60%] border-r-gray-900 bg-[#000300]'}>
+        <div className={nav ? 'fixed left-0 top-0 h-full w-[60%] border-r-gray-900 bg-[#000300] ease-in-out duration-500' : 'fixed left-[-100%] top-0 h-full w-[60%] border-r-gray-900 bg-[#000300]'}>
             <h1 className='w-full text-3xl font-bold text-[#00df9a] m-4'>REACT.</h1>
             <ul className='uppercase p-4'>
             <li className='p-4 border-b border-gray-600'>Home</li>
