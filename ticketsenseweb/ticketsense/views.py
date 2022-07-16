@@ -4,16 +4,9 @@ from rest_framework.decorators import api_view
 from .models import Trigger
 from .serializers import TriggerSerializer
 from .tasks import five_min_func
-from allauth.account.signals import user_logged_in
-from django.contrib.auth import get_user_model
 
-User =  get_user_model()
 
-def user_logged_in_receiver(request, user, **kwargs):
-    print(request)
-    print(user)
 
-user_logged_in.connect(user_logged_in_receiver, sender=User)
 
 # Create your views here.
 @api_view(['GET'])
@@ -48,8 +41,8 @@ def index(request):
     ]
     
     
-    return Response(routes)
-    # return render(request, 'ticketsense/index.html')
+    # return Response(routes)
+    return render(request, 'ticketsense/index.html')
 
 @api_view(['GET'])
 def trigger(request):
