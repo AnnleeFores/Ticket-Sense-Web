@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { DatePicker } from "@mantine/dates";
 import { SegmentedControl, Autocomplete } from "@mantine/core";
 import dayjs from "dayjs";
-import { Calendar, MasksTheater, Movie } from "tabler-icons-react";
+import { Calendar, Location, MasksTheater, Movie } from "tabler-icons-react";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
 import axios from "axios";
@@ -12,11 +12,12 @@ import requests from "../Requests";
 dayjs.extend(customParseFormat);
 
 const Main = () => {
-  const [value, onChange] = useState(new Date());
+  const [site, setSite] = useState("bms");
   const [movie, setMovie] = useState("");
   const [moviedata, setMoviedata] = useState([]);
+  const [location, setLocation] = useState([]);
   const [theater, setTheater] = useState("");
-  const [site, setSite] = useState("bms");
+  const [value, onChange] = useState(new Date());
 
   // convert output from calendar to date format
   const dateFormat = dayjs(value).format("YYYY-MM-DD");
@@ -29,8 +30,14 @@ const Main = () => {
         )
         .then((response) => {
           const movietitle = response.data.results.map(
-            (item, id) =>
-              `${item?.title} - ${dayjs(item?.release_date).format("YYYY")}`
+            (item, id) => ({
+              key: id,
+              image: item?.poster_path,
+              value: `${item?.title} (${dayjs(item?.release_date).format(
+                "YYYY"
+              )})`,
+            })
+            // `${item?.title} - ${dayjs(item?.release_date).format("YYYY")}`
           );
 
           setMoviedata(movietitle);
@@ -45,10 +52,11 @@ const Main = () => {
     console.log(theater);
     console.log(site);
     console.log(dateFormat);
-    console.log(movie);
+    console.log(moviedata);
     setMovie("");
     setMoviedata([]);
     setTheater([]);
+    setLocation([]);
     onChange(new Date());
   };
 
@@ -86,6 +94,16 @@ const Main = () => {
             value={movie}
             onChange={setMovie}
             data={moviedata}
+          />
+          <Autocomplete
+            className="w-full px-2 m-2 sm:w-2/3"
+            placeholder="Location"
+            required
+            size="md"
+            icon={<Location size={16} />}
+            value={location}
+            onChange={setLocation}
+            data={["thalassery"]}
           />
           <Autocomplete
             className="w-full px-2 m-2 sm:w-2/3"
