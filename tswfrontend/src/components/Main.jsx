@@ -81,6 +81,7 @@ const Main = () => {
             className="w-full px-2 m-2 sm:w-2/3"
             placeholder="Movie Name"
             required
+            size="md"
             icon={<Movie size={16} />}
             value={movie}
             onChange={setMovie}
@@ -90,6 +91,7 @@ const Main = () => {
             className="w-full px-2 m-2 sm:w-2/3"
             placeholder="Movie Theater"
             required
+            size="md"
             icon={<MasksTheater size={16} />}
             value={theater}
             onChange={setTheater}
@@ -99,8 +101,8 @@ const Main = () => {
           <DatePicker
             className="w-full px-2 m-2 sm:w-2/3"
             placeholder="Pick date"
-            allowFreeInput
             required
+            size="md"
             inputFormat="DD/MM/YYYY"
             icon={<Calendar size={16} />}
             value={value}
