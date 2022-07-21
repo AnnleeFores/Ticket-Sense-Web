@@ -16,20 +16,20 @@ const Main = () => {
   const [movie, setMovie] = useState("");
   const [moviedata, setMoviedata] = useState([]);
   const [theater, setTheater] = useState("");
-  const [site, setSite] = useState("react");
+  const [site, setSite] = useState("bms");
 
   // convert output from calendar to date format
   const dateFormat = dayjs(value).format("YYYY-MM-DD");
 
   useEffect(() => {
-    if (movie !== "") {
+    if (movie.length > 1) {
       axios
         .get(
           `https://api.themoviedb.org/3/search/movie?api_key=00e6af3c5f4640d75b94527d05ec7098&language=en-US&query=${movie}&page=1&include_adult=false`
         )
         .then((response) => {
           const movietitle = response.data.results.map(
-            (item) =>
+            (item, id) =>
               `${item?.title} - ${dayjs(item?.release_date).format("YYYY")}`
           );
 
@@ -42,11 +42,10 @@ const Main = () => {
 
   const log = async (e) => {
     e.preventDefault();
-    console.log(["aa", "aala"]);
     console.log(theater);
     console.log(site);
     console.log(dateFormat);
-    console.log(moviedata);
+    console.log(movie);
     setMovie("");
     setMoviedata([]);
     setTheater([]);
@@ -101,6 +100,7 @@ const Main = () => {
             className="w-full px-2 m-2 sm:w-2/3"
             placeholder="Pick date"
             allowFreeInput
+            required
             inputFormat="DD/MM/YYYY"
             icon={<Calendar size={16} />}
             value={value}
