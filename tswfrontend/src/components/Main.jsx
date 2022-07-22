@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import { DatePicker } from "@mantine/dates";
 import { SegmentedControl, Autocomplete } from "@mantine/core";
 import dayjs from "dayjs";
-import { Calendar, Location, MasksTheater, Movie } from "tabler-icons-react";
+import { Calendar, Movie } from "tabler-icons-react";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
 import axios from "axios";
-import requests from "../Requests";
+import Theatre from "./Theatre";
 
 dayjs.extend(customParseFormat);
 
@@ -15,8 +15,7 @@ const Main = () => {
   const [site, setSite] = useState("bms");
   const [movie, setMovie] = useState("");
   const [moviedata, setMoviedata] = useState([]);
-  const [location, setLocation] = useState([]);
-  const [theater, setTheater] = useState("");
+
   const [value, onChange] = useState(new Date());
 
   // convert output from calendar to date format
@@ -29,16 +28,13 @@ const Main = () => {
           `https://api.themoviedb.org/3/search/movie?api_key=00e6af3c5f4640d75b94527d05ec7098&language=en-US&query=${movie}&page=1&include_adult=false`
         )
         .then((response) => {
-          const movietitle = response.data.results.map(
-            (item, id) => ({
-              key: id,
-              image: item?.poster_path,
-              value: `${item?.title} (${dayjs(item?.release_date).format(
-                "YYYY"
-              )})`,
-            })
-            // `${item?.title} - ${dayjs(item?.release_date).format("YYYY")}`
-          );
+          const movietitle = response.data.results.map((item, id) => ({
+            key: id,
+            image: item?.poster_path,
+            value: `${item?.title} (${dayjs(item?.release_date).format(
+              "YYYY"
+            )})`,
+          }));
 
           setMoviedata(movietitle);
         });
@@ -49,14 +45,12 @@ const Main = () => {
 
   const log = async (e) => {
     e.preventDefault();
-    console.log(theater);
+
     console.log(site);
     console.log(dateFormat);
     console.log(moviedata);
     setMovie("");
     setMoviedata([]);
-    setTheater([]);
-    setLocation([]);
     onChange(new Date());
   };
 
@@ -95,26 +89,7 @@ const Main = () => {
             onChange={setMovie}
             data={moviedata}
           />
-          <Autocomplete
-            className="w-full px-2 m-2 sm:w-2/3"
-            placeholder="Location"
-            required
-            size="md"
-            icon={<Location size={16} />}
-            value={location}
-            onChange={setLocation}
-            data={["thalassery"]}
-          />
-          <Autocomplete
-            className="w-full px-2 m-2 sm:w-2/3"
-            placeholder="Movie Theater"
-            required
-            size="md"
-            icon={<MasksTheater size={16} />}
-            value={theater}
-            onChange={setTheater}
-            data={["React", "Angular", "Svelte", "Vue"]}
-          />
+          <Theatre />
 
           <DatePicker
             className="w-full px-2 m-2 sm:w-2/3"
