@@ -15,3 +15,7 @@ class Trigger(models.Model):
 
     def __str__(self):
         return f"{self.user}, {self.link}, {self.film}, {self.date}, {self.tg_user_id}, {self.site}"
+
+class TktnewData(models.Model):
+    location = models.CharField(max_length=200, null=True, blank=True)
+    data = models.JSONField(null=True)

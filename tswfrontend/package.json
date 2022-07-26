@@ -2,6 +2,7 @@
   "name": "tswfrontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://127.0.0.1:8000/",
   "dependencies": {
     "@mantine/core": "^4.2.12",
     "@mantine/dates": "^4.2.12",

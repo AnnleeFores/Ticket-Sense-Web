@@ -1,11 +1,12 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Trigger
-from .serializers import TriggerSerializer
-from .tasks import five_min_func
-
-
+from .models import Trigger, TktnewData
+from .serializers import TriggerSerializer, TktnewDataSerializer
+from .tasks import daily_func, get_tktnew_data
+import requests
+from json import loads
 
 
 # Create your views here.
@@ -40,9 +41,13 @@ def index(request):
         },
     ]
     
+    # daily_func.delay()
+    # get_tktnew_data.delay('Calicut')
+    # get_tktnew_data.delay('Peravoor')
     
-    # return Response(routes)
-    return render(request, 'ticketsense/index.html')
+  
+    return Response(routes)
+    # return render(request, 'ticketsense/index.html')
 
 @api_view(['GET'])
 def trigger(request):
@@ -56,3 +61,18 @@ def single_trig(request, pk):
     serializer = TriggerSerializer(trigger, many=False)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def tktnew_theatre(request, location):
+    try:
+        tktnewData = TktnewData.objects.get(location=location)
+        serializer = TktnewDataSerializer(tktnewData, many=False)
+        return Response(serializer.data)
+    except:
+        return JsonResponse({'error':'No data'})
+
+# helps with CORS error with browser to server when using this api
+@api_view(['GET'])
+def bms_theatre(request, location):
+    response = (requests.get(f'https://in.bookmyshow.com/pwa/api/de/venues?regionCode={location}&eventType=MT')).json()   
+    return Response(response)
+    

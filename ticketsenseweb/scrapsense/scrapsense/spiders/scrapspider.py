@@ -89,3 +89,31 @@ class bmsSpider(scrapy.Spider):
                 yield {
                     None
                 }
+
+
+# spider for sourcing ticketnew booking links and theater lists
+class tkdataSpider(scrapy.Spider):
+    name = 'tkdata'
+    
+    def start_requests(self):
+        
+        yield scrapy.Request(
+            url=f'https://www.ticketnew.com/online-advance-booking/Theatres/C/{self.location}',
+            meta=dict(
+                playwright=True,
+                playwright_include_page=True,
+                playwright_page_methods=[
+                    PageMethod('wait_for_selector', 'div.tn-entity-details')
+                ]
+            ))
+
+    async def parse(self, response):
+   
+        for elem in response.css('div.tn-entity'):
+            venuename = elem.css('div.tn-entity-details')
+            bookinglink = elem.css('div.tn-entity-book')
+            yield {
+                'value' : venuename.css('h5::text').get(),
+                'bookinglink' : bookinglink.css('a').attrib['href'],
+            }
+   
