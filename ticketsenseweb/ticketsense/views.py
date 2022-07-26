@@ -49,17 +49,38 @@ def index(request):
     return Response(routes)
     # return render(request, 'ticketsense/index.html')
 
-@api_view(['GET'])
+
+
+@api_view(['GET', 'POST'])
 def trigger(request):
-    trigger = Trigger.objects.all()
-    serializer = TriggerSerializer(trigger, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        trigger = Trigger.objects.all()
+        serializer = TriggerSerializer(trigger, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        data = request.data
+        if data['site'] == 'bms':
+            print('bms', data)
+        elif data['site'] == 'tk':
+            print('tk', data)
+        # trigger = Trigger.objects.create()
+        # serializer = TriggerSerializer(trigger, many=True)
+        # return Response(serializer.data)
+
+        trigger = Trigger.objects.all()
+        serializer = TriggerSerializer(trigger, many=True)
+        return Response(serializer.data)
+        
 
 @api_view(['GET', 'POST'])
 def single_trig(request, pk):
-    trigger = Trigger.objects.get(id=pk)
-    serializer = TriggerSerializer(trigger, many=False)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        trigger = Trigger.objects.get(id=pk)
+        serializer = TriggerSerializer(trigger, many=False)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        pass
 
 @api_view(['GET'])
 def tktnew_theatre(request, location):

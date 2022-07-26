@@ -7,6 +7,8 @@ import { Calendar, Location, MasksTheater, Movie } from "tabler-icons-react";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import axios from "axios";
 import jsonp from "jsonp";
+import Listing from "../components/Listing";
+import Row from "../components/Row";
 
 dayjs.extend(customParseFormat);
 
@@ -155,13 +157,21 @@ const Main = () => {
   const log = async (e) => {
     e.preventDefault();
 
-    console.log(site);
-    console.log(dateFormat);
-    console.log(movie);
     const loc = JSON.parse(location);
-    console.log(loc);
     const thea = JSON.parse(theater);
-    console.log(thea);
+
+    axios
+      .post(`api/trigger/`, {
+        site: site,
+        date: dateFormat,
+        film: movie,
+        location: loc,
+        theater: thea,
+      })
+      .then((response) => {
+        console.log(response.data);
+      });
+
     setMovie("");
     setMoviedata([]);
     onChange(new Date());
@@ -171,9 +181,9 @@ const Main = () => {
   };
 
   return (
-    <div className="w-full h-[500px] text-white">
-      <div className="m-4">
-        <h1 className="text-[#00df9a] text-5xl mt-[50px] font-bold flex justify-center ">
+    <div className=" text-white">
+      <div className="w-full h-full">
+        <h1 className="text-[#00df9a] text-5xl mt-[45px] font-bold flex justify-center ">
           Ticket Sense
         </h1>
 
@@ -247,6 +257,10 @@ const Main = () => {
             Enable Ticket Sense
           </button>
         </form>
+      </div>
+      <div className="mt-12 mb-6">
+        <Row title="BookMyShow" />
+        <Row title="Ticket New" />
       </div>
     </div>
   );
