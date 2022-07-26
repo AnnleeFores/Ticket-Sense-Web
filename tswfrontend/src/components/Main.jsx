@@ -108,22 +108,27 @@ const Main = () => {
   };
 
   useEffect(() => {
-    const loc = JSON.parse(location);
-    axios
-      .get(
-        `https://in.bookmyshow.com/pwa/api/de/venues?regionCode=${loc.location_code}&eventType=MT`
-      )
-
-      .then((response) => {
-        const theatre_data = response.data.BookMyShow.arrVenue.map(
-          (item, id) => ({
-            key: `T-${id}`,
-            label: item.VenueName,
-            value: `{ "name": "${item.VenueName}", "theatre_code": "${item.VenueCode}" }`,
-          })
-        );
-        setTheaterdata(theatre_data);
-      });
+    try {
+      const loc = JSON.parse(location).location_code;
+      if (loc.length > 1) {
+        axios
+          .get(
+            `https://in.bookmyshow.com/pwa/api/de/venues?regionCode=${loc}&eventType=MT`
+          )
+          .then((response) => {
+            const theatre_data = response.data.BookMyShow.arrVenue.map(
+              (item, id) => ({
+                key: `T-${id}`,
+                label: item.VenueName,
+                value: `{ "name": "${item.VenueName}", "theatre_code": "${item.VenueCode}" }`,
+              })
+            );
+            setTheaterdata(theatre_data);
+          });
+      }
+    } catch (err) {
+      setTheaterdata([]);
+    }
   }, [location]);
 
   const log = async (e) => {
@@ -141,6 +146,7 @@ const Main = () => {
     onChange(new Date());
     setLocation('{ "name": " ", "location_code": " " }');
     setTheater(`{ "name": " ", "theatre_code": " " }`);
+    setTheaterdata([]);
   };
 
   return (
