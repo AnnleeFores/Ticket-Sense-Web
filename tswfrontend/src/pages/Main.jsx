@@ -7,7 +7,6 @@ import { Calendar, Location, MasksTheater, Movie } from "tabler-icons-react";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import axios from "axios";
 import jsonp from "jsonp";
-import Listing from "../components/Listing";
 import Row from "../components/Row";
 
 dayjs.extend(customParseFormat);
@@ -259,8 +258,8 @@ const Main = () => {
         </form>
       </div>
       <div className="mt-12 mb-6">
-        <Row title="BookMyShow" />
-        <Row title="Ticket New" />
+        <Row rowID="1" title="BookMyShow" />
+        <Row rowID="2" title="Ticket New" />
       </div>
     </div>
   );
