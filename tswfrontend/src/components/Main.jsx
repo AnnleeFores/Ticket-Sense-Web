@@ -7,11 +7,10 @@ import { Calendar, Location, MasksTheater, Movie } from "tabler-icons-react";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import axios from "axios";
 import jsonp from "jsonp";
-import Row from "../components/Row";
 
 dayjs.extend(customParseFormat);
 
-const Main = () => {
+const Main = ({ childToParent }) => {
   const [site, setSite] = useState("bms");
   const [movie, setMovie] = useState("");
   const [moviedata, setMoviedata] = useState([]);
@@ -154,7 +153,7 @@ const Main = () => {
 
   const log = async (e) => {
     e.preventDefault();
-
+    childToParent(false);
     const loc = JSON.parse(location);
     const thea = JSON.parse(theater);
 
@@ -167,7 +166,7 @@ const Main = () => {
         theater: thea,
       })
       .then((response) => {
-        console.log(response.data);
+        childToParent(true);
       });
 
     setMovie("");
@@ -255,10 +254,6 @@ const Main = () => {
             Enable Ticket Sense
           </button>
         </form>
-      </div>
-      <div className="mt-12 mb-6">
-        <Row rowID="1" title="BookMyShow" />
-        <Row rowID="2" title="Ticket New" />
       </div>
     </div>
   );

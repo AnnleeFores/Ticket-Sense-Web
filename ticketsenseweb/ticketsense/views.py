@@ -56,7 +56,7 @@ def index(request):
 def trigger(request):
     if request.method == 'GET':
 
-        trigger = Trigger.objects.all()
+        trigger = Trigger.objects.all().order_by('-id')
         serializer = TriggerSerializer(trigger, many=True)
         return Response(serializer.data)
 
@@ -102,9 +102,8 @@ def trigger(request):
             link = f'{extracted_link}/{date_formatted}'
             trigger =  Trigger.objects.create(link=link, movie=movie, release_year=release_year, poster=poster, date=date, theater=theater, tg_user_id=tg_user_id, site=site )
 
-        trigger = Trigger.objects.all()
-        serializer = TriggerSerializer(trigger, many=True)
-        return Response(serializer.data)
+
+        return JsonResponse({'message':'success'}, safe=True)
 
 
 @api_view(['GET', 'PUT'])

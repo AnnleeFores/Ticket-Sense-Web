@@ -1,9 +1,9 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import React, { useEffect, useState } from "react";
 import Movie from "./Movie";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
-const Row = ({ title, fetchURL, rowID }) => {
+const Row = ({ title, trigger_data, rowID }) => {
   // const [movies, setMovies] = useState([]);
 
   // useEffect(() => {
@@ -35,22 +35,9 @@ const Row = ({ title, fetchURL, rowID }) => {
           id={"slider" + rowID}
           className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide"
         >
-          {/* {movies.map((item, id) => (
+          {trigger_data.map((item, id) => (
             <Movie key={id} item={item} />
-          ))} */}
-          <Movie />
-          <Movie />
-          <Movie />
-          <Movie />
-          <Movie />
-          <Movie />
-          <Movie />
-          <Movie />
-          <Movie />
-          <Movie />
-          <Movie />
-          <Movie />
-          <Movie />
+          ))}
         </div>
         <MdChevronRight
           onClick={slideRight}
