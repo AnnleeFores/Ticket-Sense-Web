@@ -1,2 +1,2 @@
 # Ticket-Sense
-A web app to track movie theatre ticket launches
+A web app to track movie theater ticket launches
