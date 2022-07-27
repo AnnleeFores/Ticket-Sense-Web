@@ -22,10 +22,10 @@ const Movie = () => {
           <p className="white-space-normal text-xs md:text-sm font-bold w-full p-1 text-ellipsis overflow-hidden">
             Thallumaala
           </p>
-          <p className="p-1 w-full mx-auto text-ellipsis overflow-hidden font-normal text-xs md:text-[12px] text-gray-300">
+          <p className="p-1 w-full mx-auto text-ellipsis overflow-hidden font-normal text-xs md:text-[10px] text-gray-300">
             Carnival Downtown: Thalassery
           </p>
-          <p className="w-full mx-auto font-light text-xs md:text-[12px] text-gray-300">
+          <p className="w-full mx-auto font-light text-xs md:text-[10px] text-gray-300">
             30-07-2022
           </p>
         </div>
