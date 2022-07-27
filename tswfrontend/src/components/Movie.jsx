@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { MdDeleteForever } from "react-icons/md";
+import { AiOutlineCloseSquare } from "react-icons/ai";
 
 const Movie = () => {
   const [like, setlike] = useState(false);
@@ -22,18 +21,18 @@ const Movie = () => {
           <p className="white-space-normal text-xs md:text-sm font-bold w-full p-1 text-ellipsis overflow-hidden">
             Thallumaala
           </p>
-          <p className="p-1 w-full mx-auto text-ellipsis overflow-hidden font-normal text-xs md:text-[10px] text-gray-300">
+          <p className="p-1 w-full mx-auto text-ellipsis overflow-hidden font-normal text-xs text-gray-300">
             Carnival Downtown: Thalassery
           </p>
-          <p className="w-full mx-auto font-light text-xs md:text-[10px] text-gray-300">
+          <p className="w-full mx-auto font-light text-xs text-gray-300">
             30-07-2022
           </p>
         </div>
 
         <p onClick={deleteShow}>
-          <MdDeleteForever
+          <AiOutlineCloseSquare
             size={25}
-            className="absolute top-2 right-2 md:top-4 md:right-4 text-gray-300"
+            className="absolute top-2 right-2 text-gray-300"
           />
         </p>
         {/* <p onClick={saveShow}>
