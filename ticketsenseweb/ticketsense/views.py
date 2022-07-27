@@ -55,13 +55,21 @@ def index(request):
 @api_view(['GET', 'POST'])
 def trigger(request):
     if request.method == 'GET':
+
         trigger = Trigger.objects.all()
         serializer = TriggerSerializer(trigger, many=True)
         return Response(serializer.data)
+
     elif request.method == 'POST':
+
         data = request.data
         movie = data['film'][:-7]
         release_year = data['film'][-5:-1]
+        date = data['date']
+        date_formatted = re.sub(r'-','', date)
+        theater = data['theater']['name']
+        site =  data['site']
+        tg_user_id = '378882317' #to be changed
 
         # get poster image url
         response = (requests.get(f'https://api.themoviedb.org/3/search/movie?api_key=00e6af3c5f4640d75b94527d05ec7098&language=en-US&query={movie}&page=1&include_adult=false&primary_release_year={release_year}').json())
@@ -75,43 +83,38 @@ def trigger(request):
             if (f'''{i['title']} ({i['release_date'][:4]})''') == data['film']:
                 poster = i['poster_path']
 
-        if data['site'] == 'bms':
-            location_code = data['location']['location_code']
-            date = data['date']
-            theater = data['theater']['name']
-            theater_code = data['theater']['theater_code']
-            site =  data['site']
-            tg_user_id = '378882317' #to be changed
 
+        if site == 'bms':
+            location_code = data['location']['location_code']
+            theater_code = data['theater']['theater_code']
+            
             # regex to create bms link
             theater = re.sub(r'[/.]', '', theater) #remove / & .
             theater = re.sub(r'[^\w]', ' ', theater) #remove all non alphabetical character
             theater = re.sub(r"\s+", '-', theater) # replace space with -
-            date_formatted = re.sub(r'-','', date)
-
+            
             link = f'{theater.lower()}/cinema-{location_code.lower()}-{theater_code.upper()}-MT/{date_formatted}'
 
             trigger =  Trigger.objects.create(link=link, movie=movie, release_year=release_year, poster=poster, date=date, theater=theater, tg_user_id=tg_user_id, site=site )
 
-        elif data['site'] == 'tk':
-            print('tk', data)
-
-        # serializer = TriggerSerializer(trigger, many=True)
-        # return Response(serializer.data)
+        else:
+            extracted_link = data['theater']['link']
+            link = f'{extracted_link}/{date_formatted}'
+            trigger =  Trigger.objects.create(link=link, movie=movie, release_year=release_year, poster=poster, date=date, theater=theater, tg_user_id=tg_user_id, site=site )
 
         trigger = Trigger.objects.all()
         serializer = TriggerSerializer(trigger, many=True)
         return Response(serializer.data)
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'PUT'])
 def single_trig(request, pk):
     if request.method == 'GET':
         trigger = Trigger.objects.get(id=pk)
         serializer = TriggerSerializer(trigger, many=False)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
+    elif request.method == 'PUT':
         pass
 
 @api_view(['GET'])

@@ -11,7 +11,7 @@ class tkSpider(scrapy.Spider):
     def start_requests(self):
         
         yield scrapy.Request(
-            url=f'https://www.ticketnew.com/{self.link}',
+            url=f'{self.link}',
             meta=dict(
                 playwright=True,
                 playwright_include_page=True,
