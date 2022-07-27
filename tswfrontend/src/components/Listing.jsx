@@ -20,8 +20,6 @@ const Listing = ({ parentToChild }) => {
       });
       setBms(bms);
       setTk(tk);
-      console.log(bms);
-      console.log(tk);
     });
   };
 

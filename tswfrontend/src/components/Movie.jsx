@@ -1,9 +1,12 @@
+import dayjs from "dayjs";
 import React, { useState } from "react";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 
 const Movie = ({ item }) => {
   const [like, setlike] = useState(false);
   const [saved, setSaved] = useState(false);
+
+  const dateformat = dayjs(item?.date).format("DD-MM-YYYY");
 
   const deleteShow = () => {
     console.log("deleted");
@@ -13,7 +16,7 @@ const Movie = ({ item }) => {
     <div className="h-[180px] sm:h-[200px] md:h-[220px] lg:h-[240px] inline-block cursor-pointer relative m-2">
       <img
         className="w-auto h-full block"
-        src={`https://image.tmdb.org/t/p/w500/${item?.poster}`}
+        src={`https://image.tmdb.org/t/p/w300/${item?.poster}`}
         alt="Thor"
       />
       <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white ">
@@ -25,7 +28,7 @@ const Movie = ({ item }) => {
             {item?.theater}
           </p>
           <p className="w-full mx-auto font-light text-xs text-gray-300">
-            {item?.date}
+            {dateformat}
           </p>
         </div>
 

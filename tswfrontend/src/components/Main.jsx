@@ -206,6 +206,7 @@ const Main = ({ childToParent }) => {
             className="w-full px-2 m-2 sm:w-2/3"
             placeholder="Movie Name"
             required
+            limit={8}
             size="md"
             icon={<Movie size={16} />}
             value={movie}
