@@ -59,8 +59,23 @@ def trigger(request):
         return Response(serializer.data)
     elif request.method == 'POST':
         data = request.data
+        filmname = data['film'][:-7]
+        release_year = data['film'][-5:-1]
+
+        response = (requests.get(f'https://api.themoviedb.org/3/search/movie?api_key=00e6af3c5f4640d75b94527d05ec7098&language=en-US&query={filmname}&page=1&include_adult=false&primary_release_year={release_year}').json())
+        try:
+            api_data = response['results']
+        except:
+            api_data = ''
+
+        for i in api_data:
+            if (f'''{i['title']} ({i['release_date'][:4]})''') == data['film']:
+                print(i)
+
         if data['site'] == 'bms':
+            # carnival-downtown-thalassery/cinema-thay-CDTH-MT/20220726
             print('bms', data)
+
         elif data['site'] == 'tk':
             print('tk', data)
         # trigger = Trigger.objects.create()
