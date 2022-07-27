@@ -4,7 +4,7 @@ from .models import Trigger, TktnewData
 class TriggerSerializer(ModelSerializer):
     class Meta:
         model = Trigger
-        fields = '__all__'
+        fields = ['id', 'movie', 'poster', 'date', 'theater']
         
 class TktnewDataSerializer(ModelSerializer):
     class Meta:

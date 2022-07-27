@@ -13,7 +13,7 @@ const Movie = () => {
     <div className="h-[180px] sm:h-[200px] md:h-[220px] lg:h-[240px] inline-block cursor-pointer relative m-2">
       <img
         className="w-auto h-full block"
-        src={`https://image.tmdb.org/t/p/w500//uLUJB2zqi91lhsxqqFJtCAYfLjW.jpg`}
+        src={`https://image.tmdb.org/t/p/w500/uLUJB2zqi91lhsxqqFJtCAYfLjW.jpg`}
         alt="Thor"
       />
       <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white ">

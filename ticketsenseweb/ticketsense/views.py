@@ -6,7 +6,7 @@ from .models import Trigger, TktnewData
 from .serializers import TriggerSerializer, TktnewDataSerializer
 from .tasks import daily_func, get_tktnew_data
 import requests
-from json import loads
+import re
 
 
 # Create your views here.
@@ -44,6 +44,7 @@ def index(request):
     # daily_func.delay()
     # get_tktnew_data.delay('Calicut')
     # get_tktnew_data.delay('Peravoor')
+    # get_tktnew_data.delay('Thalassery')
     
   
     return Response(routes)
@@ -59,33 +60,49 @@ def trigger(request):
         return Response(serializer.data)
     elif request.method == 'POST':
         data = request.data
-        filmname = data['film'][:-7]
+        movie = data['film'][:-7]
         release_year = data['film'][-5:-1]
 
-        response = (requests.get(f'https://api.themoviedb.org/3/search/movie?api_key=00e6af3c5f4640d75b94527d05ec7098&language=en-US&query={filmname}&page=1&include_adult=false&primary_release_year={release_year}').json())
+        # get poster image url
+        response = (requests.get(f'https://api.themoviedb.org/3/search/movie?api_key=00e6af3c5f4640d75b94527d05ec7098&language=en-US&query={movie}&page=1&include_adult=false&primary_release_year={release_year}').json())
         try:
             api_data = response['results']
         except:
             api_data = ''
-
+        
+        poster = ''
         for i in api_data:
             if (f'''{i['title']} ({i['release_date'][:4]})''') == data['film']:
-                print(i)
+                poster = i['poster_path']
 
         if data['site'] == 'bms':
-            # carnival-downtown-thalassery/cinema-thay-CDTH-MT/20220726
-            print('bms', data)
+            location_code = data['location']['location_code']
+            date = data['date']
+            theater = data['theater']['name']
+            theater_code = data['theater']['theater_code']
+            site =  data['site']
+            tg_user_id = '378882317' #to be changed
+
+            # regex to create bms link
+            theater = re.sub(r'[/.]', '', theater) #remove / & .
+            theater = re.sub(r'[^\w]', ' ', theater) #remove all non alphabetical character
+            theater = re.sub(r"\s+", '-', theater) # replace space with -
+            date_formatted = re.sub(r'-','', date)
+
+            link = f'{theater.lower()}/cinema-{location_code.lower()}-{theater_code.upper()}-MT/{date_formatted}'
+
+            trigger =  Trigger.objects.create(link=link, movie=movie, release_year=release_year, poster=poster, date=date, theater=theater, tg_user_id=tg_user_id, site=site )
 
         elif data['site'] == 'tk':
             print('tk', data)
-        # trigger = Trigger.objects.create()
+
         # serializer = TriggerSerializer(trigger, many=True)
         # return Response(serializer.data)
 
         trigger = Trigger.objects.all()
         serializer = TriggerSerializer(trigger, many=True)
         return Response(serializer.data)
-        
+
 
 @api_view(['GET', 'POST'])
 def single_trig(request, pk):

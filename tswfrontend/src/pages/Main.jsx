@@ -49,7 +49,6 @@ const Main = () => {
         .then((response) => {
           const movietitle = response.data.results.map((item, id) => ({
             key: id,
-            image: item?.poster_path,
             value: `${item?.title} (${dayjs(item?.release_date).format(
               "YYYY"
             )})`,
@@ -121,7 +120,7 @@ const Main = () => {
             (item, id) => ({
               key: `T-${id}`,
               label: item.VenueName,
-              value: `{ "name": "${item.VenueName}", "theatre_code": "${item.VenueCode}" }`,
+              value: `{ "name": "${item.VenueName}", "theater_code": "${item.VenueCode}" }`,
             })
           );
           setTheaterdata(theatre_data);
