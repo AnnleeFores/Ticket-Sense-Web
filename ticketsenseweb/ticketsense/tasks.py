@@ -33,6 +33,7 @@ API_KEY = os.getenv('API_KEY')
 
 # get image from url
 def getImage(img_link):
+
     URL = f'https://image.tmdb.org/t/p/w500{img_link}'
 
     with urllib.request.urlopen(URL) as url:
@@ -44,9 +45,12 @@ def getImage(img_link):
 bot = telebot.TeleBot(API_KEY)
 @shared_task(ignore_result=True)
 def message(msg, pk, USER_ID, poster):
-    # trigger = Trigger.objects.get(id=pk)
-    # trigger.delete()
-    bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
+    trigger = Trigger.objects.get(id=pk)
+    trigger.delete()
+    if not poster:
+        bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
+    else:
+        bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
     # for i in range(3):
     #     bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
     #     sleep(60)
@@ -133,8 +137,8 @@ def fetch(link, filmkeyword, date, site, pk, USER_ID, poster):
             else:
                 websitelink = f'{link}'
 
-            #* * to make text bold for telegram based on markdown parsing
-            msg = f""" *Ticket Sense* found ticket booking for:
+            #** ** to make text bold for telegram based on markdown parsing
+            msg = f""" *Ticket Sense* found ticket booking
 
 Movie:
 *{film}*
@@ -145,7 +149,9 @@ Theater:
 Date:
 *{date}*
 
-Link: {websitelink} """  
+Link: {websitelink} 
+
+_Make sure the booking date is correct._ """  
 
             message.delay(msg, pk, USER_ID, poster)
 
