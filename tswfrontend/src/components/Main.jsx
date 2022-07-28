@@ -11,6 +11,8 @@ import jsonp from "jsonp";
 dayjs.extend(customParseFormat);
 
 const Main = ({ childToParent }) => {
+  const key = process.env.REACT_APP_IMDB_API_KEY;
+
   const [site, setSite] = useState("bms");
   const [movie, setMovie] = useState("");
   const [moviedata, setMoviedata] = useState([]);
@@ -43,7 +45,7 @@ const Main = ({ childToParent }) => {
     if (movie.length > 1) {
       axios
         .get(
-          `https://api.themoviedb.org/3/search/movie?api_key=00e6af3c5f4640d75b94527d05ec7098&language=en-US&query=${movie}&page=1&include_adult=false`
+          `https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=${movie}&page=1&include_adult=false`
         )
         .then((response) => {
           const movietitle = response.data.results.map((item, id) => ({

@@ -8,6 +8,12 @@ from .tasks import daily_func, get_tktnew_data
 import requests
 import re
 
+import os
+from dotenv import load_dotenv
+
+TMDB_API_KEY = os.getenv('TMDB_API_KEY')
+USER_ID = os.getenv('USER_ID')
+
 
 # Create your views here.
 @api_view(['GET'])
@@ -73,10 +79,10 @@ def trigger(request):
         date_formatted = re.sub(r'-','', date)
         theater_name = data['theater']['name']
         site =  data['site']
-        tg_user_id = '378882317' #to be changed
+        tg_user_id = USER_ID #to be changed
 
         # get poster image url
-        response = (requests.get(f'https://api.themoviedb.org/3/search/movie?api_key=00e6af3c5f4640d75b94527d05ec7098&language=en-US&query={movie}&page=1&include_adult=false&primary_release_year={release_year}').json())
+        response = (requests.get(f'https://api.themoviedb.org/3/search/movie?api_key={TMDB_API_KEY}&language=en-US&query={movie}&page=1&include_adult=false&primary_release_year={release_year}').json())
         try:
             api_data = response['results']
         except:
