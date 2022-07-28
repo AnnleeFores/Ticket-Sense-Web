@@ -18,6 +18,9 @@ from dotenv import load_dotenv
 
 from time import sleep
 
+from PIL import Image
+import urllib.request
+
 
 logger = get_task_logger(__name__)
 
@@ -28,14 +31,22 @@ load_dotenv()
 API_KEY_TEST = os.getenv('API_KEY_TEST')
 API_KEY = os.getenv('API_KEY')
 
+# get image from url
+def getImage(img_link):
+    URL = f'https://image.tmdb.org/t/p/w500{img_link}'
+
+    with urllib.request.urlopen(URL) as url:
+        img = Image.open(url)
+    return img
+
 
 # code to initialize telegram bot function
 bot = telebot.TeleBot(API_KEY)
 @shared_task(ignore_result=True)
-def message(msg, pk, USER_ID):
+def message(msg, pk, USER_ID, poster):
     # trigger = Trigger.objects.get(id=pk)
     # trigger.delete()
-    bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
+    bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
     # for i in range(3):
     #     bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
     #     sleep(60)
@@ -93,15 +104,16 @@ def five_min_func():
             date = (trigger.date).strftime('%Y-%m-%d')
             site = trigger.site
             USER_ID = trigger.tg_user_id
+            poster = trigger.poster
             logger.info(f'http://127.0.0.1:9080/crawl.json?spider_name={site}&start_requests=true&crawl_args={{"link":"{link}","film":"{filmkeyword}","date":"{date}"}}')
-            fetch.delay(link, filmkeyword, date, site, pk, USER_ID)
+            fetch.delay(link, filmkeyword, date, site, pk, USER_ID, poster)
     except:
         pass
 
         
 
 @shared_task(ignore_result=True)
-def fetch(link, filmkeyword, date, site, pk, USER_ID):
+def fetch(link, filmkeyword, date, site, pk, USER_ID, poster):
     
     response = (requests.get(f'http://127.0.0.1:9080/crawl.json?spider_name={site}&start_requests=true&crawl_args={{"link":"{link}","film":"{filmkeyword}","date":"{date}"}}').json())
     try:
@@ -124,15 +136,18 @@ def fetch(link, filmkeyword, date, site, pk, USER_ID):
             #* * to make text bold for telegram based on markdown parsing
             msg = f""" *Ticket Sense* found ticket booking for:
 
+Movie:
 *{film}*
             
-📍 {venue}
+Theater: 
+*{venue}*
 
-🗓️ {date}
+Date:
+*{date}*
 
 Link: {websitelink} """  
 
-            message.delay(msg, pk, USER_ID)
+            message.delay(msg, pk, USER_ID, poster)
 
     return 'done'
 
