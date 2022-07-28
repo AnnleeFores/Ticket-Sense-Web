@@ -63,8 +63,12 @@ def trigger(request):
     elif request.method == 'POST':
 
         data = request.data
-        movie = data['film'][:-7]
-        release_year = data['film'][-5:-1]
+        if (data['film'][-13:-1]) != 'Invalid Date':
+            movie = data['film'][:-7]
+            release_year = data['film'][-5:-1]
+        else:
+            movie = data['film'][:-15]
+            release_year = ''
         date = data['date']
         date_formatted = re.sub(r'-','', date)
         theater_name = data['theater']['name']
