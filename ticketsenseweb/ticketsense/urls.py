@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
+    path("api/verifyuser/", views.verifyUser, name="verifyuser"),
     path("api/trigger/", views.trigger, name="trigger"),
     path("api/trigger/<str:pk>/", views.single_trig, name="single_trig"),
     path("api/tktnew/<str:location>/", views.tktnew_theatre, name="tktnew_theatre"),

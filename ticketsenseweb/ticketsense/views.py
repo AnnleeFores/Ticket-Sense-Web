@@ -7,12 +7,14 @@ from .serializers import TriggerSerializer, TktnewDataSerializer
 from .tasks import daily_func, get_tktnew_data
 import requests
 import re
+from .telegram_auth_check import verify_telegram_authentication
 
 import os
 from dotenv import load_dotenv
 
 TMDB_API_KEY = os.getenv('TMDB_API_KEY')
 USER_ID = os.getenv('USER_ID')
+BOT_TOKEN = os.getenv('BOT_TOKEN')
 
 
 # Create your views here.
@@ -56,6 +58,22 @@ def index(request):
     return Response(routes)
     # return render(request, 'ticketsense/index.html')
 
+@api_view(['GET', 'POST'])
+def verifyUser(request):
+    if request.method == 'GET':
+        return JsonResponse({'get':'ok'})
+    elif request.method == 'POST':
+        data = request.data
+
+        try:
+            verification =  verify_telegram_authentication(BOT_TOKEN, data)
+        except:
+            print('the data is incorrect')
+            return JsonResponse({'error':'user data is not valid'})
+
+        print(verification)
+        if verification:
+            return JsonResponse({'authenticated':'yes'})
 
 
 @api_view(['GET', 'POST'])
