@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import dayjs from "dayjs";
+import no_image from "../assets/image/no_image.png";
 
 const Listing = ({ parentToChild }) => {
   const [mainData, setmainData] = useState([]);
@@ -34,8 +35,10 @@ const Listing = ({ parentToChild }) => {
     getData();
   }, []);
 
-  const deleteShow = () => {
-    console.log("deleted");
+  const deleteShow = (id) => {
+    axios.put(`api/trigger/${id}/`).then((response) => {
+      getData();
+    });
   };
 
   return (
@@ -73,7 +76,11 @@ const Listing = ({ parentToChild }) => {
             className="shadow-lg relative rounded-lg hover:scale-105 duration-300 "
           >
             <img
-              src={`https://image.tmdb.org/t/p/w300${item?.poster}`}
+              src={
+                item?.poster
+                  ? `https://image.tmdb.org/t/p/w300${item?.poster}`
+                  : no_image
+              }
               alt={item.movie}
               className="w-[200px] h-full object-cover rounded hover:brightness-[0.15]"
             />
@@ -91,10 +98,10 @@ const Listing = ({ parentToChild }) => {
                 </p>
               </div>
 
-              <p onClick={deleteShow}>
+              <p onClick={() => deleteShow(item?.id)}>
                 <AiOutlineCloseSquare
                   size={25}
-                  className="absolute top-1 right-1 text-gray-300"
+                  className="absolute top-1 right-1 text-gray-300 hover:bg-gray-300 hover:text-black"
                 />
               </p>
             </div>

@@ -114,7 +114,9 @@ def single_trig(request, pk):
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        pass
+        trigger = Trigger.objects.get(id=pk)
+        trigger.delete()
+        return JsonResponse({'success':'deleted'})
 
 @api_view(['GET'])
 def tktnew_theatre(request, location):
