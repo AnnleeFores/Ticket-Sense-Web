@@ -60,7 +60,7 @@ const Listing = ({ parentToChild }) => {
             className={
               buttonValue == "all"
                 ? "border text-xs rounded bg-[#00df9a] text-black p-1 px-2 m-2"
-                : "border text-xs rounded hover:bg-[#00df9a] hover:text-black p-1 px-2 m-2"
+                : "border text-xs rounded  p-1 px-2 m-2"
             }
           >
             All
@@ -70,7 +70,7 @@ const Listing = ({ parentToChild }) => {
             className={
               buttonValue == "bms"
                 ? "border text-xs rounded bg-[#00df9a] text-black p-1 m-2"
-                : "border text-xs rounded hover:bg-[#00df9a] hover:text-black p-1 m-2"
+                : "border text-xs rounded  p-1 m-2"
             }
           >
             BookMyShow
@@ -80,7 +80,7 @@ const Listing = ({ parentToChild }) => {
             className={
               buttonValue == "tk"
                 ? "border text-xs rounded bg-[#00df9a] text-black p-1 m-2"
-                : "border text-xs rounded hover:bg-[#00df9a] hover:text-black p-1 m-2"
+                : "border text-xs rounded  p-1 m-2"
             }
           >
             Ticket New
