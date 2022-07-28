@@ -89,7 +89,7 @@ def five_min_func():
         for trigger in triggers:
             pk = trigger.id
             link = trigger.link
-            filmkeyword = (trigger.movie).lower()
+            filmkeyword = (trigger.movie).lower() #make sure that this is lowercase otherwise the result will be incorrect
             date = (trigger.date).strftime('%Y-%m-%d')
             site = trigger.site
             USER_ID = trigger.tg_user_id
