@@ -89,10 +89,11 @@ def five_min_func():
         for trigger in triggers:
             pk = trigger.id
             link = trigger.link
-            filmkeyword = trigger.movie
+            filmkeyword = (trigger.movie).lower()
             date = (trigger.date).strftime('%Y-%m-%d')
             site = trigger.site
             USER_ID = trigger.tg_user_id
+            logger.info(f'http://127.0.0.1:9080/crawl.json?spider_name={site}&start_requests=true&crawl_args={{"link":"{link}","film":"{filmkeyword}","date":"{date}"}}')
             fetch.delay(link, filmkeyword, date, site, pk, USER_ID)
     except:
         pass
@@ -118,7 +119,7 @@ def fetch(link, filmkeyword, date, site, pk, USER_ID):
             if site == 'bms':
                 websitelink = f'https://in.bookmyshow.com/buytickets/{link}'
             else:
-                websitelink = f'https://www.ticketnew.com/{link}'
+                websitelink = f'{link}'
 
             #* * to make text bold for telegram based on markdown parsing
             msg = f""" *Ticket Sense* found ticket booking for:

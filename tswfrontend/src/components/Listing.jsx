@@ -16,6 +16,7 @@ const Listing = ({ parentToChild }) => {
       const data = response.data.map((item, id) => item);
       setmainData(data);
       setdisplayData(data);
+      setButtonValue("all");
     });
   };
 
@@ -59,8 +60,8 @@ const Listing = ({ parentToChild }) => {
             onClick={() => filterType("all")}
             className={
               buttonValue == "all"
-                ? "border text-xs rounded bg-[#00df9a] text-black p-1 px-2 m-2"
-                : "border text-xs rounded  p-1 px-2 m-2"
+                ? "border text-xs rounded bg-[#00df9a] border-[#00df9a] text-black p-1 px-4 m-2"
+                : "border text-xs rounded hover:border-[#00df9a] hover:text-[#00df9a]  p-1 px-4 m-2"
             }
           >
             All
@@ -69,8 +70,8 @@ const Listing = ({ parentToChild }) => {
             onClick={() => filterType("bms")}
             className={
               buttonValue == "bms"
-                ? "border text-xs rounded bg-[#00df9a] text-black p-1 m-2"
-                : "border text-xs rounded  p-1 m-2"
+                ? "border text-xs rounded bg-[#00df9a] border-[#00df9a] text-black p-1 m-2"
+                : "border text-xs rounded hover:border-[#00df9a] hover:text-[#00df9a] p-1 m-2"
             }
           >
             BookMyShow
@@ -79,8 +80,8 @@ const Listing = ({ parentToChild }) => {
             onClick={() => filterType("tk")}
             className={
               buttonValue == "tk"
-                ? "border text-xs rounded bg-[#00df9a] text-black p-1 m-2"
-                : "border text-xs rounded  p-1 m-2"
+                ? "border text-xs rounded bg-[#00df9a] border-[#00df9a] text-black p-1 m-2"
+                : "border text-xs rounded hover:border-[#00df9a] hover:text-[#00df9a] p-1 m-2"
             }
           >
             Ticket New
