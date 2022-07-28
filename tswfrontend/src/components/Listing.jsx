@@ -66,7 +66,7 @@ const Listing = ({ parentToChild }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 gap-6 pt-4">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 gap-4 pt-4">
         {displayData.map((item, index) => (
           <div
             key={index}
@@ -78,7 +78,7 @@ const Listing = ({ parentToChild }) => {
               className="w-[200px] h-full object-cover rounded hover:brightness-[0.15]"
             />
 
-            <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white ">
+            <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 cursor-pointer opacity-0 hover:opacity-100 text-white ">
               <div className="flex flex-col justify-center items-center h-full text-center ">
                 <p className="white-space-normal text-xs md:text-sm font-bold w-full p-1 text-ellipsis overflow-hidden">
                   {item?.movie}
@@ -94,7 +94,7 @@ const Listing = ({ parentToChild }) => {
               <p onClick={deleteShow}>
                 <AiOutlineCloseSquare
                   size={25}
-                  className="absolute top-2 right-2 text-gray-300"
+                  className="absolute top-1 right-1 text-gray-300"
                 />
               </p>
             </div>
