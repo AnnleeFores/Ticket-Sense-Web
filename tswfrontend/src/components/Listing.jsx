@@ -59,7 +59,7 @@ const Listing = ({ parentToChild }) => {
           <button
             onClick={() => filterType("all")}
             className={
-              buttonValue == "all"
+              buttonValue === "all"
                 ? "border text-xs rounded bg-[#00df9a] border-[#00df9a] text-black p-1 px-4 m-2"
                 : "border text-xs rounded hover:border-[#00df9a] hover:text-[#00df9a]  p-1 px-4 m-2"
             }
@@ -69,7 +69,7 @@ const Listing = ({ parentToChild }) => {
           <button
             onClick={() => filterType("bms")}
             className={
-              buttonValue == "bms"
+              buttonValue === "bms"
                 ? "border text-xs rounded bg-[#00df9a] border-[#00df9a] text-black p-1 m-2"
                 : "border text-xs rounded hover:border-[#00df9a] hover:text-[#00df9a] p-1 m-2"
             }
@@ -79,7 +79,7 @@ const Listing = ({ parentToChild }) => {
           <button
             onClick={() => filterType("tk")}
             className={
-              buttonValue == "tk"
+              buttonValue === "tk"
                 ? "border text-xs rounded bg-[#00df9a] border-[#00df9a] text-black p-1 m-2"
                 : "border text-xs rounded hover:border-[#00df9a] hover:text-[#00df9a] p-1 m-2"
             }
