@@ -251,7 +251,7 @@ const Main = ({ childToParent }) => {
             onChange={onChange}
           />
 
-          <button className="bg-[#00df9a] text-black rounded-md font-medium w-[200px] m-4 mt-8 p-3">
+          <button className="bg-[#00df9a] text-black rounded-md shadow-lg font-medium w-[200px] m-4 mt-8 p-3">
             Enable Ticket Sense
           </button>
         </form>
