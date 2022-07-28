@@ -1,9 +1,16 @@
 import scrapy
 from scrapy_playwright.page import PageMethod
 from dateutil import parser
+import re
 
 
 # playwright integration for js website  Note: Make sure to edit settings.py to include playwright
+
+# remove all symbols from string and join together
+def compareRegex(movie):
+    movie = re.sub(r'[^\w]', '', movie)
+    return movie
+
 # spider for ticketnew website
 class tkSpider(scrapy.Spider):
     name = 'tk'
@@ -35,7 +42,7 @@ class tkSpider(scrapy.Spider):
             DT = (parser.parse(date)).strftime('%Y-%m-%d')
             for show in response.css('div.tn-entity-details')[1:]:
                 showname = show.css('h5::text').get()
-                if film in showname.lower():
+                if compareRegex(film) in compareRegex(showname.lower()):
                     yield {
                         'venue' : venuehtml.css('h2::text').get(),
                         'show' : showname,
@@ -79,7 +86,7 @@ class bmsSpider(scrapy.Spider):
             if DT == date:
                 for show in response.css('a.nameSpan'):
                     showname = show.css('a::text').get()
-                    if film in showname.lower():
+                    if compareRegex(film) in compareRegex(showname.lower()):
                         yield {
                             'venue' : venuehtml.css('a::text').get(),
                             'show' : showname,
