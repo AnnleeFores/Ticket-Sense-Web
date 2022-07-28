@@ -9,6 +9,8 @@ const Listing = ({ parentToChild }) => {
 
   const [displayData, setdisplayData] = useState([]);
 
+  const [buttonValue, setButtonValue] = useState("all");
+
   const getData = async () => {
     axios.get(`api/trigger/`).then((response) => {
       const data = response.data.map((item, id) => item);
@@ -18,11 +20,16 @@ const Listing = ({ parentToChild }) => {
   };
 
   const filterType = (site) => {
-    setdisplayData(
-      mainData.filter((item) => {
-        return item.site === site;
-      })
-    );
+    setButtonValue(site);
+    if (site === "all") {
+      setdisplayData(mainData);
+    } else {
+      setdisplayData(
+        mainData.filter((item) => {
+          return item.site === site;
+        })
+      );
+    }
   };
 
   useEffect(() => {
@@ -49,20 +56,32 @@ const Listing = ({ parentToChild }) => {
       <div>
         <div className="flex justify-center md:justify-start flex-wrap">
           <button
-            onClick={() => setdisplayData(mainData)}
-            className="border text-xs px-3 rounded hover:bg-[#00df9a] hover:text-black p-1 m-2"
+            onClick={() => filterType("all")}
+            className={
+              buttonValue == "all"
+                ? "border text-xs rounded bg-[#00df9a] text-black p-1 px-2 m-2"
+                : "border text-xs rounded hover:bg-[#00df9a] hover:text-black p-1 px-2 m-2"
+            }
           >
             All
           </button>
           <button
             onClick={() => filterType("bms")}
-            className="border text-xs rounded hover:bg-[#00df9a] hover:text-black p-1 m-2"
+            className={
+              buttonValue == "bms"
+                ? "border text-xs rounded bg-[#00df9a] text-black p-1 m-2"
+                : "border text-xs rounded hover:bg-[#00df9a] hover:text-black p-1 m-2"
+            }
           >
             BookMyShow
           </button>
           <button
             onClick={() => filterType("tk")}
-            className="border text-xs rounded hover:bg-[#00df9a] hover:text-black p-1 m-2"
+            className={
+              buttonValue == "tk"
+                ? "border text-xs rounded bg-[#00df9a] text-black p-1 m-2"
+                : "border text-xs rounded hover:bg-[#00df9a] hover:text-black p-1 m-2"
+            }
           >
             Ticket New
           </button>
