@@ -17,7 +17,7 @@ const Movie = ({ item }) => {
       <img
         className="w-auto h-full block"
         src={`https://image.tmdb.org/t/p/w300/${item?.poster}`}
-        alt="Thor"
+        alt={item?.movie}
       />
       <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white ">
         <div className="flex flex-col justify-center items-center h-full text-center ">
@@ -38,13 +38,6 @@ const Movie = ({ item }) => {
             className="absolute top-2 right-2 text-gray-300"
           />
         </p>
-        {/* <p onClick={saveShow}>
-          {like ? (
-            <FaHeart className="absolute top-4 left-4 text-gray-300" />
-          ) : (
-            <FaRegHeart className="absolute top-4 left-4 text-gray-300" />
-          )}
-        </p> */}
       </div>
     </div>
   );

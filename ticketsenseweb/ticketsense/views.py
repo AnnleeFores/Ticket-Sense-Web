@@ -67,7 +67,7 @@ def trigger(request):
         release_year = data['film'][-5:-1]
         date = data['date']
         date_formatted = re.sub(r'-','', date)
-        theater = data['theater']['name']
+        theater_name = data['theater']['name']
         site =  data['site']
         tg_user_id = '378882317' #to be changed
 
@@ -89,18 +89,18 @@ def trigger(request):
             theater_code = data['theater']['theater_code']
             
             # regex to create bms link
-            theater = re.sub(r'[/.]', '', theater) #remove / & .
+            theater = re.sub(r'[/.]', '', theater_name) #remove / & .
             theater = re.sub(r'[^\w]', ' ', theater) #remove all non alphabetical character
             theater = re.sub(r"\s+", '-', theater) # replace space with -
             
             link = f'{theater.lower()}/cinema-{location_code.lower()}-{theater_code.upper()}-MT/{date_formatted}'
 
-            trigger =  Trigger.objects.create(link=link, movie=movie, release_year=release_year, poster=poster, date=date, theater=theater, tg_user_id=tg_user_id, site=site )
+            trigger =  Trigger.objects.create(link=link, movie=movie, release_year=release_year, poster=poster, date=date, theater=theater_name, tg_user_id=tg_user_id, site=site )
 
         else:
             extracted_link = data['theater']['link']
             link = f'{extracted_link}/{date_formatted}'
-            trigger =  Trigger.objects.create(link=link, movie=movie, release_year=release_year, poster=poster, date=date, theater=theater, tg_user_id=tg_user_id, site=site )
+            trigger =  Trigger.objects.create(link=link, movie=movie, release_year=release_year, poster=poster, date=date, theater=theater_name, tg_user_id=tg_user_id, site=site )
 
 
         return JsonResponse({'message':'success'}, safe=True)
