@@ -30,22 +30,34 @@ def index(request):
         },
 
         {
-            'Endpoint': '/index/create/',
+            'Endpoint': 'api/verifyuser/',
             'method': 'POST',
             'body': {'body': ""},
-            'description': 'Creates new trigger with data sent in post request'
+            'description': 'Verifies telegram user login'
         },
         {
-            'Endpoint': '/index/id/update/',
-            'method': 'PUT',
+            'Endpoint': 'api/trigger/',
+            'method': 'GET, POST',
             'body': {'body': ""},
-            'description': 'updates an existing trigger with data sent in post request'
+            'description': 'Creates or updates trigger and sends updated data as response'
         },
         {
-            'Endpoint': '/index/id/delete/',
-            'method': 'DELETE',
+            'Endpoint': 'api/trigger/<str:pk>/',
+            'method': 'GET, PUT',
             'body': None,
-            'description': 'Deletes trigger'
+            'description': 'Deletes trigger and fetches single trigger'
+        },
+        {
+            'Endpoint': 'api/tktnew/<str:location>/',
+            'method': 'GET',
+            'body': None,
+            'description': 'API endpoint to get theater details for ticketnew based on location'
+        },
+        {
+            'Endpoint': 'api/bms/<str:location>/',
+            'method': 'GET',
+            'body': None,
+            'description': 'API proxy endpoint to get theater details for bookmyshow based on location'
         },
     ]
     
@@ -56,7 +68,6 @@ def index(request):
     
   
     return Response(routes)
-    # return render(request, 'ticketsense/index.html')
 
 @api_view(['GET', 'POST'])
 def verifyUser(request):
@@ -71,9 +82,8 @@ def verifyUser(request):
             print('the data is incorrect')
             return JsonResponse({'error':'user data is not valid'})
 
-        print(verification)
         if verification:
-            return JsonResponse({'authenticated':'yes'})
+            return JsonResponse({'authenticated':verification})
 
 
 @api_view(['GET', 'POST'])
