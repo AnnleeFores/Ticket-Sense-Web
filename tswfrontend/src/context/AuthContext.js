@@ -7,8 +7,23 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
+  // follow these initial state when resetting state anywhere else
   const [user, setUser] = useState("");
   const [newpost, setNewpost] = useState(false);
+  const [site, setSite] = useState("bms");
+
+  const [movie, setMovie] = useState("");
+  const [moviedata, setMoviedata] = useState([]);
+
+  const [location, setLocation] = useState(
+    '{ "name": " ", "location_code": " " }'
+  );
+  const [locdata, setLocdata] = useState([]);
+
+  const [theater, setTheater] = useState(
+    `{ "name": " ", "theatre_code": " " }`
+  );
+  const [theaterdata, setTheaterdata] = useState([{ value: "", label: "" }]);
 
   const navigate = useNavigate();
 
@@ -25,15 +40,25 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
-  const triggerNewpost = async (trigger) => {
-    setNewpost(trigger);
-  };
-
   let contextData = {
     user: user,
     loginUser: loginUser,
     newpost: newpost,
-    triggerNewpost: triggerNewpost,
+    setNewpost: setNewpost,
+    site: site,
+    setSite: setSite,
+    movie: movie,
+    setMovie: setMovie,
+    moviedata: moviedata,
+    setMoviedata: setMoviedata,
+    location: location,
+    setLocation: setLocation,
+    locdata: locdata,
+    setLocdata: setLocdata,
+    theater: theater,
+    setTheater: setTheater,
+    theaterdata: theaterdata,
+    setTheaterdata: setTheaterdata,
   };
 
   return (
