@@ -79,7 +79,6 @@ def verifyUser(request):
 
     if request.method == 'POST':
         data = request.data
-        print(data)
 
         try:
             verification =  verify_telegram_authentication(BOT_TOKEN, data)
