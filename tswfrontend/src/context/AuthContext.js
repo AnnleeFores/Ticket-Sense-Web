@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     axios.post(`api/verifyuser/`, response).then((response) => {
       if (response.data.id) {
         setUser(response.data.id);
-        navigate("/home");
+        navigate("/");
       } else {
         console.log({ error: "authentication invalid" });
         alert("something went wrong!!");
