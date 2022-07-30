@@ -6,7 +6,7 @@ import no_image from "../assets/image/no_image.png";
 import AuthContext from "../context/AuthContext";
 
 const Listing = () => {
-  let { newpost } = useContext(AuthContext);
+  let { newpost, user } = useContext(AuthContext);
 
   const [mainData, setmainData] = useState([]);
 
@@ -15,7 +15,7 @@ const Listing = () => {
   const [buttonValue, setButtonValue] = useState("all");
 
   const getData = async () => {
-    axios.get(`api/trigger/`).then((response) => {
+    axios.get(`api/getdata/${user}/`).then((response) => {
       const data = response.data.map((item, id) => item);
       setmainData(data);
       setdisplayData(data);

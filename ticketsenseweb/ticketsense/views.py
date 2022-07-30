@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Trigger, TktnewData
+from .models import Trigger, TktnewData, TGuser
 from .serializers import TriggerSerializer, TktnewDataSerializer
 from .tasks import daily_func, get_tktnew_data
 import requests
@@ -13,7 +13,6 @@ import os
 from dotenv import load_dotenv
 
 TMDB_API_KEY = os.getenv('TMDB_API_KEY')
-USER_ID = os.getenv('USER_ID')
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 
 
@@ -36,8 +35,14 @@ def index(request):
             'description': 'Verifies telegram user login'
         },
         {
+            'Endpoint': 'api/getdata/<str:pk>/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns an array of current userspecific triggers'
+        },
+        {
             'Endpoint': 'api/trigger/',
-            'method': 'GET, POST',
+            'method': 'POST',
             'body': {'body': ""},
             'description': 'Creates or updates trigger and sends updated data as response'
         },
@@ -65,7 +70,7 @@ def index(request):
     # get_tktnew_data.delay('Calicut')
     # get_tktnew_data.delay('Peravoor')
     # get_tktnew_data.delay('Thalassery')
-    
+
   
     return Response(routes)
 
@@ -83,20 +88,43 @@ def verifyUser(request):
             print('the data is incorrect')
             return JsonResponse({'error':'user data is not valid', 'id': False})
 
-        if verification:
-            print(verification)
-            return JsonResponse({'message':'verified', 'id': verification})
+        id = verification['id']
+        first_name = verification['first_name']
+        last_name = verification['last_name']
+
+        try:
+            last_name = verification['last_name']
+        except:
+            last_name = ''
+
+        try:
+            username = verification['username']
+        except:
+            username = ''
+
+        tguser, created =  TGuser.objects.update_or_create(id=id, first_name=first_name, last_name=last_name, username=username, defaults={'id': id})
+
+        return JsonResponse({'message':'verified', 'id': verification['id']})
 
 
-@api_view(['GET', 'POST'])
-def trigger(request):
+# get the list of all user specific triggers
+
+@api_view(['GET'])
+def getData(request, pk):
+
     if request.method == 'GET':
 
-        trigger = Trigger.objects.all().order_by('-id')
+        tguser =  TGuser.objects.get(id=pk)
+
+        trigger = Trigger.objects.filter(tg_user=tguser).order_by('-id')
         serializer = TriggerSerializer(trigger, many=True)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
+
+@api_view(['POST'])
+def trigger(request):
+    
+    if request.method == 'POST':
 
         data = request.data
         if (data['film'][-13:-1]) != 'Invalid Date':
@@ -109,7 +137,9 @@ def trigger(request):
         date_formatted = re.sub(r'-','', date)
         theater_name = data['theater']['name']
         site =  data['site']
-        tg_user_id = USER_ID #to be changed
+        tg_user_id = data['tg_user_id']
+
+        tguser = TGuser.objects.get(id=tg_user_id) # get tguser instance
 
         # get poster image url
         response = (requests.get(f'https://api.themoviedb.org/3/search/movie?api_key={TMDB_API_KEY}&language=en-US&query={movie}&page=1&include_adult=false&primary_release_year={release_year}').json())
@@ -135,12 +165,12 @@ def trigger(request):
             
             link = f'{theater.lower()}/cinema-{location_code.lower()}-{theater_code.upper()}-MT/{date_formatted}'
 
-            trigger =  Trigger.objects.create(link=link, movie=movie, release_year=release_year, poster=poster, date=date, theater=theater_name, tg_user_id=tg_user_id, site=site )
+            trigger =  Trigger.objects.create(link=link, movie=movie, release_year=release_year, poster=poster, date=date, theater=theater_name, tg_user=tguser, site=site )
 
         else:
             extracted_link = data['theater']['link']
             link = f'{extracted_link}/{date_formatted}'
-            trigger =  Trigger.objects.create(link=link, movie=movie, release_year=release_year, poster=poster, date=date, theater=theater_name, tg_user_id=tg_user_id, site=site )
+            trigger =  Trigger.objects.create(link=link, movie=movie, release_year=release_year, poster=poster, date=date, theater=theater_name, tg_user=tguser, site=site )
 
 
         return JsonResponse({'message':'success'}, safe=True)

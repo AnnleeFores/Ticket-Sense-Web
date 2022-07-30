@@ -9,7 +9,7 @@ function App() {
     <>
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<Loginpage />} />
+          <Route path="/" element={<Loginpage />} exact />
           <Route element={<PrivateRoutes />}>
             <Route element={<Home />} path="/home" exact />
           </Route>

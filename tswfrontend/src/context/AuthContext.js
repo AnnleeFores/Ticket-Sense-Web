@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
         setUser(response.data.id);
         navigate("/home");
       } else {
+        setUser(response.data.id);
         console.log({ error: "authentication invalid" });
         alert("something went wrong!!");
       }

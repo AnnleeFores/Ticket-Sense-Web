@@ -47,10 +47,14 @@ bot = telebot.TeleBot(API_KEY)
 def message(msg, pk, USER_ID, poster):
     trigger = Trigger.objects.get(id=pk)
     trigger.delete()
-    if not poster:
-        bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
-    else:
-        bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
+
+    try:
+        if not poster:
+            bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
+        else:
+            bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
+    except:
+        logger.info('issue with telegram user permissions')
     # for i in range(3):
     #     bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
     #     sleep(60)
@@ -107,9 +111,8 @@ def five_min_func():
             filmkeyword = (trigger.movie).lower() #make sure that this is lowercase otherwise the result will be incorrect
             date = (trigger.date).strftime('%Y-%m-%d')
             site = trigger.site
-            USER_ID = trigger.tg_user_id
+            USER_ID = trigger.tg_user.id #from foreign key data
             poster = trigger.poster
-            logger.info(f'http://127.0.0.1:9080/crawl.json?spider_name={site}&start_requests=true&crawl_args={{"link":"{link}","film":"{filmkeyword}","date":"{date}"}}')
             fetch.delay(link, filmkeyword, date, site, pk, USER_ID, poster)
     except:
         pass
@@ -125,7 +128,6 @@ def fetch(link, filmkeyword, date, site, pk, USER_ID, poster):
     except:
         data = ''
 
-    logger.info(data)
     if data != []:
         for i in data:
             film = i['show']

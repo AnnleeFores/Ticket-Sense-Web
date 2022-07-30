@@ -12,7 +12,7 @@ import AuthContext from "../context/AuthContext";
 dayjs.extend(customParseFormat);
 
 const Main = () => {
-  let { triggerNewpost } = useContext(AuthContext);
+  let { triggerNewpost, user } = useContext(AuthContext);
 
   const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
@@ -169,9 +169,12 @@ const Main = () => {
         film: movie,
         location: loc,
         theater: thea,
+        tg_user_id: user,
       })
       .then((response) => {
-        triggerNewpost(true);
+        if (response.data.message === "success") {
+          triggerNewpost(true);
+        }
       });
 
     setMovie("");
