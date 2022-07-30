@@ -76,9 +76,8 @@ def index(request):
 
 @api_view(['GET', 'POST'])
 def verifyUser(request):
-    if request.method == 'GET':
-        return JsonResponse({'get':'ok'})
-    elif request.method == 'POST':
+
+    if request.method == 'POST':
         data = request.data
         print(data)
 
@@ -108,7 +107,6 @@ def verifyUser(request):
 
 
 # get the list of all user specific triggers
-
 @api_view(['GET'])
 def getData(request, pk):
 
@@ -120,7 +118,7 @@ def getData(request, pk):
         serializer = TriggerSerializer(trigger, many=True)
         return Response(serializer.data)
 
-
+# create a new trigger
 @api_view(['POST'])
 def trigger(request):
     
@@ -137,8 +135,8 @@ def trigger(request):
         date_formatted = re.sub(r'-','', date)
         theater_name = data['theater']['name']
         site =  data['site']
-        tg_user_id = data['tg_user_id']
 
+        tg_user_id = data['tg_user_id']
         tguser = TGuser.objects.get(id=tg_user_id) # get tguser instance
 
         # get poster image url
@@ -175,7 +173,8 @@ def trigger(request):
 
         return JsonResponse({'message':'success'}, safe=True)
 
-
+# edit/delete delete a trigger
+# edit feature to be implemented in future revisions
 @api_view(['GET', 'PUT'])
 def single_trig(request, pk):
     if request.method == 'GET':
@@ -188,6 +187,8 @@ def single_trig(request, pk):
         trigger.delete()
         return JsonResponse({'success':'deleted'})
 
+
+#Get theater list for ticket new from database
 @api_view(['GET'])
 def tktnew_theatre(request, location):
     try:
@@ -197,7 +198,7 @@ def tktnew_theatre(request, location):
     except:
         return JsonResponse({'error':'No data'})
 
-# helps with CORS error with browser to server when using this api
+# helps with CORS error when communicating directly with the server from client side
 @api_view(['GET'])
 def bms_theatre(request, location):
     response = (requests.get(f'https://in.bookmyshow.com/pwa/api/de/venues?regionCode={location}&eventType=MT')).json()   
