@@ -1,10 +1,13 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import dayjs from "dayjs";
 import no_image from "../assets/image/no_image.png";
+import AuthContext from "../context/AuthContext";
 
-const Listing = ({ parentToChild }) => {
+const Listing = () => {
+  let { newpost } = useContext(AuthContext);
+
   const [mainData, setmainData] = useState([]);
 
   const [displayData, setdisplayData] = useState([]);
@@ -34,10 +37,10 @@ const Listing = ({ parentToChild }) => {
   };
 
   useEffect(() => {
-    if (parentToChild === true) {
+    if (newpost === true) {
       getData();
     }
-  }, [parentToChild]);
+  }, [newpost]);
 
   useEffect(() => {
     getData();

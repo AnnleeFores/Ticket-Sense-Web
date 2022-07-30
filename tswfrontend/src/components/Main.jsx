@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { DatePicker } from "@mantine/dates";
 import { SegmentedControl, Autocomplete, Select } from "@mantine/core";
 import dayjs from "dayjs";
@@ -7,10 +7,13 @@ import { Calendar, Location, MasksTheater, Movie } from "tabler-icons-react";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import axios from "axios";
 import jsonp from "jsonp";
+import AuthContext from "../context/AuthContext";
 
 dayjs.extend(customParseFormat);
 
-const Main = ({ childToParent }) => {
+const Main = () => {
+  let { triggerNewpost } = useContext(AuthContext);
+
   const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
   const [site, setSite] = useState("bms");
@@ -155,7 +158,7 @@ const Main = ({ childToParent }) => {
 
   const log = async (e) => {
     e.preventDefault();
-    childToParent(false);
+    triggerNewpost(false);
     const loc = JSON.parse(location);
     const thea = JSON.parse(theater);
 
@@ -168,7 +171,7 @@ const Main = ({ childToParent }) => {
         theater: thea,
       })
       .then((response) => {
-        childToParent(true);
+        triggerNewpost(true);
       });
 
     setMovie("");

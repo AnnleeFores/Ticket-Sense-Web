@@ -46,4 +46,4 @@ def verify_telegram_authentication(bot_token, request_data):
             with calculated hash based on bot token.''')
 
 
-    return True
+    return request_data['id']

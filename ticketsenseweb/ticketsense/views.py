@@ -75,15 +75,17 @@ def verifyUser(request):
         return JsonResponse({'get':'ok'})
     elif request.method == 'POST':
         data = request.data
+        print(data)
 
         try:
             verification =  verify_telegram_authentication(BOT_TOKEN, data)
         except:
             print('the data is incorrect')
-            return JsonResponse({'error':'user data is not valid'})
+            return JsonResponse({'error':'user data is not valid', 'id': False})
 
         if verification:
-            return JsonResponse({'authenticated':verification})
+            print(verification)
+            return JsonResponse({'message':'verified', 'id': verification})
 
 
 @api_view(['GET', 'POST'])

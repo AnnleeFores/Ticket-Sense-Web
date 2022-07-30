@@ -1,19 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import TelegramLoginButton from "react-telegram-login";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
 const Telegram = () => {
-  const navigate = useNavigate();
+  const { loginUser } = useContext(AuthContext);
 
   const handleTelegramResponse = (response) => {
-    axios.post(`api/verifyuser/`, response).then((response) => {
-      if (response.data.authenticated === true) {
-        navigate("/home");
-      } else {
-        console.log({ error: "authentication invalid" });
-      }
-    });
+    loginUser(response);
   };
 
   return (
