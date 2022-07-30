@@ -9,9 +9,9 @@ function App() {
     <>
       <AuthProvider>
         <Routes>
-          <Route path="/login" element={<Loginpage />} />
+          <Route path="/" element={<Loginpage />} />
           <Route element={<PrivateRoutes />}>
-            <Route element={<Home />} path="/" exact />
+            <Route element={<Home />} path="/home" exact />
           </Route>
         </Routes>
       </AuthProvider>
