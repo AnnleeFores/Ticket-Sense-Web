@@ -118,6 +118,7 @@ def getData(request, pk):
         serializer = TriggerSerializer(trigger, many=True)
         return Response(serializer.data)
 
+
 # create a new trigger
 @api_view(['POST'])
 def trigger(request):
