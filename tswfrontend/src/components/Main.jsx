@@ -76,13 +76,14 @@ const Main = () => {
         >
           <div className=" mb-3 flex flex-col sm:flex-row justify-between items-center">
             <p className="  text-gray-300  m-2 ">Select Booking Website</p>
-
             <SelectSlider />
           </div>
+
           <AutoSearch />
 
           <LocationSelect />
           <TheaterSelect />
+
           <DatePicker
             className="w-full px-2 m-2 sm:w-2/3"
             placeholder="Pick date"
