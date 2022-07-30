@@ -31,7 +31,7 @@ def index(request):
         {
             'Endpoint': 'api/verifyuser/',
             'method': 'POST',
-            'body': {'body': ""},
+            'body': None,
             'description': 'Verifies telegram user login'
         },
         {
@@ -43,7 +43,7 @@ def index(request):
         {
             'Endpoint': 'api/trigger/',
             'method': 'POST',
-            'body': {'body': ""},
+            'body': None,
             'description': 'Creates or updates trigger and sends updated data as response'
         },
         {
