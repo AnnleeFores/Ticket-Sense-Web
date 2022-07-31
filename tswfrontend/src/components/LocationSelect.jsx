@@ -9,7 +9,7 @@ const LocationSelect = () => {
     useContext(AuthContext);
 
   useEffect(() => {
-    setTheater(`{ "name": " ", "theatre_code": " " }`);
+    setTheater("");
     if (site === "bms") {
       bms_theatre();
     } else {

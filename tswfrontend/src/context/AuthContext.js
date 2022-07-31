@@ -15,14 +15,10 @@ export const AuthProvider = ({ children }) => {
   const [movie, setMovie] = useState("");
   const [moviedata, setMoviedata] = useState([]);
 
-  const [location, setLocation] = useState(
-    '{ "name": " ", "location_code": " " }'
-  );
-  const [locdata, setLocdata] = useState([]);
+  const [location, setLocation] = useState("");
+  const [locdata, setLocdata] = useState([{ value: "", label: "" }]);
 
-  const [theater, setTheater] = useState(
-    `{ "name": " ", "theatre_code": " " }`
-  );
+  const [theater, setTheater] = useState("");
   const [theaterdata, setTheaterdata] = useState([{ value: "", label: "" }]);
 
   const navigate = useNavigate();

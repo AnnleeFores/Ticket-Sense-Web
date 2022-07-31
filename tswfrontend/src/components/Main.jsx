@@ -58,8 +58,8 @@ const Main = () => {
     setMovie("");
     setMoviedata([]);
     onChange(new Date());
-    setLocation('{ "name": " ", "location_code": " " }');
-    setTheater(`{ "name": " ", "theatre_code": " " }`);
+    setLocation("");
+    setTheater("");
     setTheaterdata([{ value: "", label: "" }]);
   };
 

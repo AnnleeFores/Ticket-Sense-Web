@@ -1,7 +1,7 @@
 import Home from "./pages/Home";
 import Loginpage from "./pages/Loginpage";
 import { Route, Routes } from "react-router-dom";
-import PrivateRoutes from "./auth/PrivateRoutes";
+import PrivateRoutes from "./util/PrivateRoutes";
 import { AuthProvider } from "./context/AuthContext";
 
 function App() {
