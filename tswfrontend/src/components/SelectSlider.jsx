@@ -9,8 +9,8 @@ const SelectSlider = () => {
     useContext(AuthContext);
 
   useEffect(() => {
-    setLocation("");
-    setTheater("");
+    setLocation([]);
+    setTheater([]);
     setTheaterdata([{ value: "", label: "" }]);
     if (site === "bms") {
       bms_sense();
