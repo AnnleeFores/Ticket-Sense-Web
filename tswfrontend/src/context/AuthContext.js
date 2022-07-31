@@ -23,15 +23,14 @@ export const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const loginUser = async (response) => {
-    axios.post(`api/verifyuser/`, response).then((response) => {
-      if (response.data.id) {
+  const loginUser = async (responsefromtg) => {
+    axios.post(`api/verifyuser/`, responsefromtg).then((response) => {
+      if (response.data.id === responsefromtg.id) {
         setUser(response.data.id);
         navigate("/home");
       } else {
         setUser(response.data.id);
-        console.log({ error: "authentication invalid" });
-        alert("something went wrong!!");
+        alert("User authentication invalid!!");
       }
     });
   };

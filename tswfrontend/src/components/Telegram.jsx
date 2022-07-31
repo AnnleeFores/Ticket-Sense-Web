@@ -5,8 +5,8 @@ import AuthContext from "../context/AuthContext";
 const Telegram = () => {
   const { loginUser } = useContext(AuthContext);
 
-  const handleTelegramResponse = (response) => {
-    loginUser(response);
+  const handleTelegramResponse = (responsefromtg) => {
+    loginUser(responsefromtg);
   };
 
   return (
