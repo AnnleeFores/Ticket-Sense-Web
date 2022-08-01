@@ -10,7 +10,11 @@ import re
 from .telegram_auth_check import verify_telegram_authentication
 
 import os
+
 from dotenv import load_dotenv
+
+
+load_dotenv()
 
 TMDB_API_KEY = os.getenv('TMDB_API_KEY')
 BOT_TOKEN = os.getenv('BOT_TOKEN')
@@ -66,6 +70,7 @@ def index(request):
         },
     ]
     
+    # for testing purposes only
     # daily_func.delay()
     # get_tktnew_data.delay('Calicut')
     # get_tktnew_data.delay('Peravoor')

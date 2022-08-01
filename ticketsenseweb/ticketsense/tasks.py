@@ -55,8 +55,15 @@ def message(msg, pk, USER_ID, poster):
             bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
     except:
         logger.info('issue with telegram user permissions')
+    
     # for i in range(3):
-    #     bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
+    #     try:
+    #         if not poster:
+    #             bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
+    #         else:
+    #             bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
+    #     except:
+    #         logger.info('issue with telegram user permissions')
     #     sleep(60)
     
 
@@ -153,7 +160,7 @@ Date:
 
 Link: {websitelink} 
 
-_Make sure the booking date is correct._ """  
+_Make sure the booking date is correct when buying the ticket._ """  
 
             message.delay(msg, pk, USER_ID, poster)
 
