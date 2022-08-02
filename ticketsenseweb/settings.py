@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-=dm&e-0bthtk@wrzu+yk6e5#h_1028fz14^1mp5azi@fb140c7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -150,5 +150,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CORS_ALLOWED_ORIGINS = [
-    "https://ticket-sense-web.vercel.app/",
+    "https://ticket-sense-web.vercel.app",
+    'http://127.0.0.1',
+    'http://localhost',
+    'https://58de-61-1-199-87.in.ngrok.io'
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True

@@ -41,7 +41,7 @@ const Main = () => {
     const thea = JSON.parse(theater);
 
     axios
-      .post(`api/trigger/`, {
+      .post(`${process.env.REACT_APP_API_URI}/api/trigger/`, {
         site: site,
         date: dateFormat,
         film: movie,

@@ -15,12 +15,14 @@ const Listing = () => {
   const [buttonValue, setButtonValue] = useState("all");
 
   const getData = async () => {
-    axios.get(`api/getdata/${user}/`).then((response) => {
-      const data = response.data.map((item, id) => item);
-      setmainData(data);
-      setdisplayData(data);
-      setButtonValue("all");
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_URI}/api/getdata/${user}/`)
+      .then((response) => {
+        const data = response.data.map((item, id) => item);
+        setmainData(data);
+        setdisplayData(data);
+        setButtonValue("all");
+      });
   };
 
   const filterType = (site) => {
@@ -47,9 +49,11 @@ const Listing = () => {
   }, []);
 
   const deleteShow = (id) => {
-    axios.put(`api/trigger/${id}/`).then((response) => {
-      getData();
-    });
+    axios
+      .put(`${process.env.REACT_APP_API_URI}/api/trigger/${id}/`)
+      .then((response) => {
+        getData();
+      });
   };
 
   return (

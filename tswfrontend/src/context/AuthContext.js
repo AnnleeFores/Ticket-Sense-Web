@@ -24,15 +24,17 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const loginUser = async (responsefromtg) => {
-    axios.post(`api/verifyuser/`, responsefromtg).then((response) => {
-      if (response.data.id === responsefromtg.id) {
-        setUser(response.data.id);
-        navigate("/home");
-      } else {
-        setUser(response.data.id);
-        alert("User authentication invalid!!");
-      }
-    });
+    axios
+      .post(`${process.env.REACT_APP_API_URI}/api/verifyuser/`, responsefromtg)
+      .then((response) => {
+        if (response.data.id === responsefromtg.id) {
+          setUser(response.data.id);
+          navigate("/home");
+        } else {
+          setUser(response.data.id);
+          alert("User authentication invalid!!");
+        }
+      });
   };
 
   let contextData = {

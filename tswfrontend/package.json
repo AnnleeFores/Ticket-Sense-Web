@@ -2,7 +2,6 @@
   "name": "tswfrontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://ea6a-61-1-199-87.in.ngrok.io/",
   "dependencies": {
     "@mantine/core": "^4.2.12",
     "@mantine/dates": "^4.2.12",
