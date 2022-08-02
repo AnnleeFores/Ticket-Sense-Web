@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# assigns value collected from .env to variables
+REDIS_LINK = os.getenv('REDIS_LINK')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -129,7 +136,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
+# CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_BROKER_URL = REDIS_LINK
 CELERY_RESULT_BACKEND  = 'django-db'
 if CELERY_RESULT_BACKEND == 'django-db':
     INSTALLED_APPS += ['django_celery_results',]
