@@ -24,6 +24,8 @@ REDIS_LINK = os.getenv('REDIS_LINK')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+IS_HEROKU = "DYNO" in os.environ
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -31,8 +33,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-=dm&e-0bthtk@wrzu+yk6e5#h_1028fz14^1mp5azi@fb140c7'
 
+if 'SECRET_KEY' in os.environ:
+    SECRET_KEY = os.environ["SECRET_KEY"]
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+if not IS_HEROKU:
+    DEBUG = True
 
 ALLOWED_HOSTS = ['ticketsense.herokuapp.com','127.0.0.1']
 
@@ -99,7 +105,8 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+if "DATABASE_URL" in os.environ:
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 AUTH_USER_MODEL = 'ticketsense.User'
 
