@@ -216,6 +216,5 @@ def tktnew_theatre(request, location):
 @api_view(['GET'])
 def bms_theatre(request, location):
     response = (requests.get(f'https://in.bookmyshow.com/pwa/api/de/venues?regionCode={location}&eventType=MT')).json()   
-    print(response)
     return Response(response)
     

@@ -22,16 +22,19 @@ const LocationSelect = () => {
       const loc = JSON.parse(location).location_code;
       if (loc.length > 1) {
         axios
-          .get(`${process.env.REACT_APP_API_URI}/api/bms/${loc}/`)
+          .get(
+            `https://in.bookmyshow.com/pwa/api/de/venues?regionCode=${loc}&eventType=MT`
+          )
           .then((response) => {
-            const theatre_data = response.data.BookMyShow.arrVenue.map(
-              (item, id) => ({
-                key: `T-${id}`,
-                label: item.VenueName,
-                value: `{ "name": "${item.VenueName}", "theater_code": "${item.VenueCode}" }`,
-              })
-            );
-            setTheaterdata(theatre_data);
+            console.log(response);
+            // const theatre_data = response.data.BookMyShow.arrVenue.map(
+            //   (item, id) => ({
+            //     key: `T-${id}`,
+            //     label: item.VenueName,
+            //     value: `{ "name": "${item.VenueName}", "theater_code": "${item.VenueCode}" }`,
+            //   })
+            // );
+            // setTheaterdata(theatre_data);
           });
       }
     } catch (err) {
