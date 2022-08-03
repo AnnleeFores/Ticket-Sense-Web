@@ -45,8 +45,11 @@ def getImage(img_link):
 bot = telebot.TeleBot(API_KEY)
 @shared_task(ignore_result=True)
 def message(msg, pk, USER_ID, poster):
-    trigger = Trigger.objects.get(id=pk)
-    trigger.delete()
+    try:
+        trigger = Trigger.objects.get(id=pk)
+        trigger.delete()
+    except:
+        logger.info(f'''data doesn't exit''')
 
     try:
         if not poster:

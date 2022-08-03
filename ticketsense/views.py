@@ -183,14 +183,23 @@ def trigger(request):
 @api_view(['GET', 'PUT'])
 def single_trig(request, pk):
     if request.method == 'GET':
-        trigger = Trigger.objects.get(id=pk)
-        serializer = TriggerSerializer(trigger, many=False)
-        return Response(serializer.data)
+        try:
+            trigger = Trigger.objects.get(id=pk)
+            serializer = TriggerSerializer(trigger, many=False)
+            return Response(serializer.data)
+        except:
+            print('data not available')
+            return JsonResponse({'message':'already deleted'})
 
     elif request.method == 'PUT':
-        trigger = Trigger.objects.get(id=pk)
-        trigger.delete()
-        return JsonResponse({'success':'deleted'})
+        try:
+            trigger = Trigger.objects.get(id=pk)
+            trigger.delete()
+            return JsonResponse({'success':'deleted'})
+        except:
+            print('already deleted')
+            return JsonResponse({'message':'already deleted'})
+        
 
 
 #Get theater list for ticket new from database
