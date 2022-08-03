@@ -1,3 +1,3 @@
-worker1: playwright install && cd scrapsense && scrapyrt
+# worker1: playwright install && cd scrapsense && scrapyrt
 celery: celery -A ticketsenseweb worker -l info -n a1
 celerybeat: celery -A ticketsenseweb.celery beat -l INFO
