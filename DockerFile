@@ -9,7 +9,7 @@ RUN apt-get update \
     && apt-get install -y gettext \
     && apt-get install -y libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info \
     # dependencies for playwright
-    && apt-get install -y libjpeg-turbo8 ttf-ubuntu-font-family libicu66 libvpx6 \
+    # && apt-get install -y libjpeg-turbo8 ttf-ubuntu-font-family libicu66 libvpx6 \
     # cleaning up unused files
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && rm -rf /var/lib/apt/lists/*
