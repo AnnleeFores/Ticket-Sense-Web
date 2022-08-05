@@ -2,6 +2,7 @@
 
 python manage.py collectstatic --no-input
 python manage.py migrate
+playwright install
 gunicorn ticketsenseweb.wsgi --bind=0.0.0.0:80
 celery -A ticketsenseweb worker -l info -n a1
 celery -A ticketsenseweb.celery beat -l INFO
