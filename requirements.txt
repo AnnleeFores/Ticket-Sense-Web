@@ -26,6 +26,7 @@ django-timezone-field==5.0
 djangorestframework==3.13.1
 filelock==3.7.1
 flower==1.1.0
+greenlet==1.1.2
 gunicorn==20.1.0
 humanize==4.2.3
 hyperlink==21.0.0
@@ -39,6 +40,7 @@ lxml==4.9.1
 packaging==21.3
 parsel==1.6.0
 Pillow==9.2.0
+playwright==1.24.1
 prometheus-client==0.14.1
 prompt-toolkit==3.0.30
 Protego==0.2.1
@@ -47,6 +49,7 @@ pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.21
 PyDispatcher==2.0.5
+pyee==8.1.0
 pyOpenSSL==22.0.0
 pyparsing==3.0.9
 pyTelegramBotAPI==4.6.1
@@ -59,6 +62,7 @@ redis==4.3.4
 requests==2.28.1
 requests-file==1.5.1
 Scrapy==2.6.2
+scrapy-playwright==0.0.20
 scrapyrt==0.13.0
 service-identity==21.1.0
 six==1.16.0
@@ -72,7 +76,7 @@ urllib3==1.26.11
 vine==5.0.0
 w3lib==1.22.0
 wcwidth==0.2.5
+websockets==10.1
 whitenoise==6.2.0
 wrapt==1.14.1
 zope.interface==5.4.0
-honcho==1.1.0
