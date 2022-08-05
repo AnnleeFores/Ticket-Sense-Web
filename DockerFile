@@ -23,5 +23,4 @@ COPY . /usr/src/app
 
 EXPOSE 80
 
-
-CMD [ "cd", "scrapsense", ";", "scrapyrt" ]
+CMD ["sh", "./runserver.sh"]
