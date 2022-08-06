@@ -45,7 +45,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['ticketsense.herokuapp.com','127.0.0.1', '*']
+ALLOWED_HOSTS = ['ticketsense.project.annleefores.com','127.0.0.1']
 
 # Application definition
 
@@ -188,6 +188,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "https://ticket-sense-web.vercel.app",
+    "https://ticketsense.annleefores.com/"
     "http://localhost",
     "http://localhost:41949",
 ]
