@@ -30,6 +30,7 @@ load_dotenv()
 # assigns value collected from .env to variables
 API_KEY_TEST = os.getenv('API_KEY_TEST')
 API_KEY = os.getenv('API_KEY')
+scrapsense_link =  os.getenv('scrapsense_link')
 
 # get image from url
 def getImage(img_link):
@@ -92,7 +93,7 @@ def daily_func():
 @shared_task(ignore_result=True)
 def get_tktnew_data(location):
 
-    response = (requests.get(f'http://127.0.0.1:9080/crawl.json?spider_name=tkdata&start_requests=true&crawl_args={{"location":"{location}"}}').json())
+    response = (requests.get(f'{scrapsense_link}/crawl.json?spider_name=tkdata&start_requests=true&crawl_args={{"location":"{location}"}}').json())
     try:
         data = response['items']
     except:
@@ -132,7 +133,7 @@ def five_min_func():
 @shared_task(ignore_result=True)
 def fetch(link, filmkeyword, date, site, pk, USER_ID, poster):
     
-    response = (requests.get(f'http://127.0.0.1:9080/crawl.json?spider_name={site}&start_requests=true&crawl_args={{"link":"{link}","film":"{filmkeyword}","date":"{date}"}}').json())
+    response = (requests.get(f'{scrapsense_link}/crawl.json?spider_name={site}&start_requests=true&crawl_args={{"link":"{link}","film":"{filmkeyword}","date":"{date}"}}').json())
     try:
         data = response['items']
     except:
