@@ -188,7 +188,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "https://ticket-sense-web.vercel.app",
-    "https://ticketsense.annleefores.com"
+    "https://ticketsense.annleefores.com",
     "http://localhost",
     "http://localhost:41949",
 ]
