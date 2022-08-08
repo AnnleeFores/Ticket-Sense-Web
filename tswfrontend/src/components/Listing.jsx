@@ -14,8 +14,6 @@ const Listing = () => {
 
   const [buttonValue, setButtonValue] = useState("all");
 
-  setUser(sessionStorage.getItem("user"));
-
   const getData = async () => {
     axios
       .get(`${process.env.REACT_APP_API_URI}/api/getdata/${user}/`)
@@ -47,6 +45,7 @@ const Listing = () => {
   }, [newpost]);
 
   useEffect(() => {
+    setUser(sessionStorage.getItem("user"));
     getData();
   }, []);
 
