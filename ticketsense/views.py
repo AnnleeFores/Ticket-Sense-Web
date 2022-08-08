@@ -70,11 +70,8 @@ def index(request):
         },
     ]
     
-    # for testing purposes only
+    # for testing purposes only # add a monthly cron job to run this later
     # daily_func.delay()
-    # get_tktnew_data.delay('Calicut')
-    # get_tktnew_data.delay('Peravoor')
-    # get_tktnew_data.delay('Thalassery')
 
   
     return Response(routes)

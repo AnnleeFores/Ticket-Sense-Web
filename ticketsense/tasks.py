@@ -92,9 +92,9 @@ def daily_func():
     endidx = response.text.rfind(')')
     data = loads(response.text[startidx + 1:endidx])
 
-    # for j in data['body']['data']['hots']:
-    #     get_tktnew_data.delay(j['name'])
-
+    for j in data['body']['data']['hots']:
+        get_tktnew_data.delay(j['name'])
+    
     for i in data['body']['data']['all']:
         get_tktnew_data.delay(i['name'])
     
@@ -113,8 +113,8 @@ def get_tktnew_data(location):
 
 @shared_task(ignore_result=True)
 def store_tktnew_data(response, location):
-    # tktnewData, created = TktnewData.objects.update_or_create(location=location, data=response, defaults={'location': location})
-    tktnewData = TktnewData.objects.create(location=location, data=response)
+    tktnewData, created = TktnewData.objects.update_or_create(location=location, data=response, defaults={'location': location})
+    # tktnewData = TktnewData.objects.create(location=location, data=response)
 
 
 
