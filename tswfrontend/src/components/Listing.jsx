@@ -14,9 +14,11 @@ const Listing = () => {
 
   const [buttonValue, setButtonValue] = useState("all");
 
+  const [user_data, setUser_data] = useState("");
+
   const getData = async () => {
     axios
-      .get(`${process.env.REACT_APP_API_URI}/api/getdata/${user}/`)
+      .get(`${process.env.REACT_APP_API_URI}/api/getdata/${user_data}/`)
       .then((response) => {
         const data = response.data.map((item, id) => item);
         setmainData(data);
@@ -40,12 +42,12 @@ const Listing = () => {
 
   useEffect(() => {
     if (newpost === true) {
-      setUser(sessionStorage.getItem("user"));
       getData();
     }
   }, [newpost]);
 
   useEffect(() => {
+    setUser_data(sessionStorage.getItem("user"));
     getData();
   }, []);
 
