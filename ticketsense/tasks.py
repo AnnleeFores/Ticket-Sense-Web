@@ -94,6 +94,7 @@ def daily_func():
 
     # for j in data['body']['data']['hots']:
     #     get_tktnew_data.delay(j['name'])
+    
     for i in data['body']['data']['all']:
         get_tktnew_data.delay(i['name'])
     
