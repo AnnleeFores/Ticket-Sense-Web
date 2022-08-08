@@ -6,7 +6,7 @@ const PrivateRoutes = () => {
   let { user } = useContext(AuthContext);
 
   if (user) {
-    sessionStorage.setItem("user", "#88f7%s5X5v%x&");
+    sessionStorage.setItem("user", user);
   }
 
   let data = sessionStorage.getItem("user");

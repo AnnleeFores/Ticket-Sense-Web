@@ -14,9 +14,11 @@ const Listing = () => {
 
   const [buttonValue, setButtonValue] = useState("all");
 
+  let user_data = sessionStorage.getItem("user");
+
   const getData = async () => {
     axios
-      .get(`${process.env.REACT_APP_API_URI}/api/getdata/${user}/`)
+      .get(`${process.env.REACT_APP_API_URI}/api/getdata/${user_data}/`)
       .then((response) => {
         const data = response.data.map((item, id) => item);
         setmainData(data);
