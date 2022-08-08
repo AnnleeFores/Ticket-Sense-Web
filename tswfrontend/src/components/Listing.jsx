@@ -6,7 +6,7 @@ import no_image from "../assets/image/no_image.png";
 import AuthContext from "../context/AuthContext";
 
 const Listing = () => {
-  let { newpost } = useContext(AuthContext);
+  let { newpost, user } = useContext(AuthContext);
 
   const [mainData, setmainData] = useState([]);
 
@@ -14,11 +14,9 @@ const Listing = () => {
 
   const [buttonValue, setButtonValue] = useState("all");
 
-  let user_data = sessionStorage.getItem("user");
-
   const getData = async () => {
     axios
-      .get(`${process.env.REACT_APP_API_URI}/api/getdata/${user_data}/`)
+      .get(`${process.env.REACT_APP_API_URI}/api/getdata/${user}/`)
       .then((response) => {
         const data = response.data.map((item, id) => item);
         setmainData(data);
