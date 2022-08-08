@@ -92,10 +92,10 @@ def daily_func():
     endidx = response.text.rfind(')')
     data = loads(response.text[startidx + 1:endidx])
 
-    for j in data['body']['data']['hots']:
-        get_tktnew_data.delay(j['name'])
-    # for i in data['body']['data']['all']:
-    #     get_tktnew_data.delay(i['name'])
+    # for j in data['body']['data']['hots']:
+    #     get_tktnew_data.delay(j['name'])
+    for i in data['body']['data']['all']:
+        get_tktnew_data.delay(i['name'])
     
     
 @shared_task(ignore_result=True)
