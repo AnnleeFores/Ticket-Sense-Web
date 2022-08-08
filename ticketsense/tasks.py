@@ -21,6 +21,8 @@ from time import sleep
 from PIL import Image
 import urllib.request
 
+import re
+
 
 logger = get_task_logger(__name__)
 
@@ -40,6 +42,12 @@ def getImage(img_link):
     with urllib.request.urlopen(URL) as url:
         img = Image.open(url)
     return img
+
+
+# remove all symbols from string and join together
+def compareRegex(movie):
+    movie = re.sub(r'[^\w]', '', movie)
+    return movie
 
 
 # code to initialize telegram bot function
@@ -124,20 +132,44 @@ def five_min_func():
             site = trigger.site
             USER_ID = trigger.tg_user.id #from foreign key data
             poster = trigger.poster
-            fetch.delay(link, filmkeyword, date, site, pk, USER_ID, poster)
+            try:
+                venuecode = trigger.theater_code
+            except:
+                venuecode = ''
+            fetch.delay(link, filmkeyword, date, site, pk, USER_ID, poster, venuecode)
     except:
         pass
 
         
 
 @shared_task(ignore_result=True)
-def fetch(link, filmkeyword, date, site, pk, USER_ID, poster):
+def fetch(link, filmkeyword, date, site, pk, USER_ID, poster, venuecode):
+
+    data = []
     
-    response = (requests.get(f'{scrapsense_link}/crawl.json?spider_name={site}&start_requests=true&crawl_args={{"link":"{link}","film":"{filmkeyword}","date":"{date}"}}').json())
-    try:
-        data = response['items']
-    except:
-        data = ''
+    if site == 'tk':
+        response = (requests.get(f'{scrapsense_link}/crawl.json?spider_name=tk&start_requests=true&crawl_args={{"link":"{link}","film":"{filmkeyword}","date":"{date}"}}').json())
+        try:
+            data = response['items']
+        except:
+            data
+    else:
+        date = re.sub(r'[^\w]', '', date)
+        
+        response = (requests.get(f'https://in.bookmyshow.com/api/v2/mobile/showtimes/byvenue?venueCode={venuecode}&dateCode={date}').json())
+        try:
+            bmsdata = response
+        except:
+            bmsdata = ''
+        
+        if bmsdata['ShowDetails'][0]['Date'] == date and bmsdata != '':
+            for films in bmsdata['ShowDetails'][0]['Event']:
+                film = films['ChildEvents'][0]['EventName']
+                if compareRegex(filmkeyword) in compareRegex(film.lower()):
+                    date = bmsdata['ShowDetails'][0]['Date']
+                    venue = bmsdata['ShowDetails'][0]['Venues']['VenueName']
+                    jsondata = {'venue':venue, 'show':film, 'date':date}
+                    data.append(jsondata)
 
     if data != []:
         for i in data:

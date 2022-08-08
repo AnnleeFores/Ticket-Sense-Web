@@ -71,7 +71,7 @@ def index(request):
     ]
     
     # for testing purposes only
-    daily_func.delay()
+    # daily_func.delay()
     # get_tktnew_data.delay('Calicut')
     # get_tktnew_data.delay('Peravoor')
     # get_tktnew_data.delay('Thalassery')
@@ -130,6 +130,7 @@ def trigger(request):
     if request.method == 'POST':
 
         data = request.data
+        print(data)
         if (data['film'][-13:-1]) != 'Invalid Date':
             movie = data['film'][:-7]
             release_year = data['film'][-5:-1]
@@ -168,7 +169,7 @@ def trigger(request):
             
             link = f'{theater.lower()}/cinema-{location_code.lower()}-{theater_code.upper()}-MT/{date_formatted}'
 
-            trigger =  Trigger.objects.create(link=link, movie=movie, release_year=release_year, poster=poster, date=date, theater=theater_name, tg_user=tguser, site=site )
+            trigger =  Trigger.objects.create(link=link, movie=movie, release_year=release_year, poster=poster, date=date, theater=theater_name, theater_code=theater_code, tg_user=tguser, site=site )
 
         else:
             extracted_link = data['theater']['link']
