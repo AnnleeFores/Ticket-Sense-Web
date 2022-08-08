@@ -103,7 +103,6 @@ WSGI_APPLICATION = 'ticketsenseweb.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-#hey
 
 if DEBUG:
     DATABASES = {

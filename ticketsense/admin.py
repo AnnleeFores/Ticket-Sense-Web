@@ -3,7 +3,7 @@ from .models import User, Trigger, TktnewData, TGuser
 
 
 class TriggerAdmin(admin.ModelAdmin):
-    list_display = ("id", "link", "movie", "poster", "date", "theater", "tg_user", "site")
+    list_display = ("id", "link", "movie", "poster", "date", "theater", "theater_code", "tg_user", "site")
 
 class TktnewDataAdmin(admin.ModelAdmin):
     list_display = ("id", "location", "data")
