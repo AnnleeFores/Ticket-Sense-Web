@@ -17,7 +17,6 @@ dayjs.extend(customParseFormat);
 const Main = () => {
   let {
     setNewpost,
-    user,
     site,
     movie,
     setMoviedata,
@@ -34,6 +33,8 @@ const Main = () => {
   // convert output from calendar to date format
   const dateFormat = dayjs(value).format("YYYY-MM-DD");
 
+  const [user_data, setUser_data] = useState(sessionStorage.getItem("user"));
+
   const log = async (e) => {
     e.preventDefault();
     setNewpost(false);
@@ -47,7 +48,7 @@ const Main = () => {
         film: movie,
         location: loc,
         theater: thea,
-        tg_user_id: user,
+        tg_user_id: user_data,
       })
       .then((response) => {
         if (response.data.message === "success") {
