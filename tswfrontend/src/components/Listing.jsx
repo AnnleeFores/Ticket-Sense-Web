@@ -6,7 +6,7 @@ import no_image from "../assets/image/no_image.png";
 import AuthContext from "../context/AuthContext";
 
 const Listing = () => {
-  let { newpost, user } = useContext(AuthContext);
+  let { newpost } = useContext(AuthContext);
 
   const [mainData, setmainData] = useState([]);
 
