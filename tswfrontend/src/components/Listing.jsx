@@ -40,12 +40,12 @@ const Listing = () => {
 
   useEffect(() => {
     if (newpost === true) {
+      setUser(sessionStorage.getItem("user"));
       getData();
     }
   }, [newpost]);
 
   useEffect(() => {
-    setUser(sessionStorage.getItem("user"));
     getData();
   }, []);
 
