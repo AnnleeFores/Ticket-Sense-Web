@@ -6,7 +6,7 @@ import no_image from "../assets/image/no_image.png";
 import AuthContext from "../context/AuthContext";
 
 const Listing = () => {
-  let { newpost, user, setUser } = useContext(AuthContext);
+  let { newpost, user } = useContext(AuthContext);
 
   const [mainData, setmainData] = useState([]);
 
@@ -14,7 +14,7 @@ const Listing = () => {
 
   const [buttonValue, setButtonValue] = useState("all");
 
-  const [user_data, setUser_data] = useState("");
+  const [user_data, setUser_data] = useState(user);
 
   const getData = async () => {
     axios
