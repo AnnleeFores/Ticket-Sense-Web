@@ -71,7 +71,7 @@ def index(request):
     ]
     
     # for testing purposes only
-    # daily_func.delay()
+    daily_func.delay()
     # get_tktnew_data.delay('Calicut')
     # get_tktnew_data.delay('Peravoor')
     # get_tktnew_data.delay('Thalassery')
