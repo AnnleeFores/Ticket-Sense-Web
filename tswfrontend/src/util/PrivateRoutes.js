@@ -5,7 +5,13 @@ import AuthContext from "../context/AuthContext";
 const PrivateRoutes = () => {
   let { user } = useContext(AuthContext);
 
-  return user ? <Outlet /> : <Navigate to="/" />;
+  if (user) {
+    sessionStorage.setItem("user", "#88f7%s5X5v%x&");
+  }
+
+  let data = sessionStorage.getItem("user");
+
+  return data ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default PrivateRoutes;
