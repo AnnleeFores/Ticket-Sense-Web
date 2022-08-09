@@ -90,7 +90,7 @@ def verifyUser(request):
 
         id = verification['id']
         first_name = verification['first_name']
-        last_name = verification['last_name']
+
 
         try:
             last_name = verification['last_name']
