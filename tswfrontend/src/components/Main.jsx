@@ -28,7 +28,7 @@ const Main = () => {
     setTheater,
   } = useContext(AuthContext);
 
-  const [value, onChange] = useState(new Date());
+  const [value, onChange] = useState("");
 
   // convert output from calendar to date format
   const dateFormat = dayjs(value).format("YYYY-MM-DD");
@@ -42,7 +42,7 @@ const Main = () => {
     const thea = JSON.parse(theater);
 
     axios
-      .post(`${process.env.REACT_APP_API_URI}/api/trigger/`, {
+      .post(`${process.env.REACT_APP_API_URI}api/trigger/`, {
         site: site,
         date: dateFormat,
         film: movie,
@@ -87,7 +87,7 @@ const Main = () => {
 
           <DatePicker
             className="w-full px-2 m-2 sm:w-2/3"
-            placeholder="Pick date"
+            placeholder="Ticket Booking Date"
             required
             size="md"
             inputFormat="DD/MM/YYYY"

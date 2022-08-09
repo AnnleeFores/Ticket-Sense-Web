@@ -22,7 +22,7 @@ const LocationSelect = () => {
       const loc = JSON.parse(location).location_code;
       if (loc.length > 1) {
         axios
-          .get(`${process.env.REACT_APP_API_URI}/api/bms/${loc}/`)
+          .get(`${process.env.REACT_APP_API_URI}api/bms/${loc}/`)
           .then((response) => {
             const theatre_data = response.data.BookMyShow.arrVenue.map(
               (item, id) => ({
@@ -44,7 +44,7 @@ const LocationSelect = () => {
       const loc = JSON.parse(location).name;
       if (loc.length > 1) {
         axios
-          .get(`${process.env.REACT_APP_API_URI}/api/tktnew/${loc}/`)
+          .get(`${process.env.REACT_APP_API_URI}api/tktnew/${loc}/`)
           .then((response) => {
             if (!response.data.error) {
               const theatre_data = response.data.data.map((item, id) => ({

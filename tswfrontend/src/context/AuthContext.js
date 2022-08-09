@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
 
   const loginUser = async (responsefromtg) => {
     axios
-      .post(`${process.env.REACT_APP_API_URI}/api/verifyuser/`, responsefromtg)
+      .post(`${process.env.REACT_APP_API_URI}api/verifyuser/`, responsefromtg)
       .then((response) => {
         if (response.data.id === responsefromtg.id) {
           setUser(response.data.id);

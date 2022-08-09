@@ -18,7 +18,7 @@ const Listing = () => {
 
   const getData = async () => {
     axios
-      .get(`${process.env.REACT_APP_API_URI}/api/getdata/${user_data}/`)
+      .get(`${process.env.REACT_APP_API_URI}api/getdata/${user_data}/`)
       .then((response) => {
         const data = response.data.map((item, id) => item);
         setmainData(data);
@@ -52,7 +52,7 @@ const Listing = () => {
 
   const deleteShow = (id) => {
     axios
-      .put(`${process.env.REACT_APP_API_URI}/api/trigger/${id}/`)
+      .put(`${process.env.REACT_APP_API_URI}api/trigger/${id}/`)
       .then((response) => {
         getData();
       });
