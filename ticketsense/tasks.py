@@ -60,23 +60,23 @@ def message(msg, pk, USER_ID, poster):
     except:
         logger.info(f'''data doesn't exit''')
 
-    try:
-        if not poster:
-            bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
-        else:
-            bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
-    except:
-        logger.info('issue with telegram user permissions')
+    # try:
+    #     if not poster:
+    #         bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
+    #     else:
+    #         bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
+    # except:
+    #     logger.info('issue with telegram user permissions')
     
-    # for i in range(3):
-    #     try:
-    #         if not poster:
-    #             bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
-    #         else:
-    #             bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
-    #     except:
-    #         logger.info('issue with telegram user permissions')
-    #     sleep(60)
+    for i in range(3):
+        try:
+            if not poster:
+                bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
+            else:
+                bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
+        except:
+            logger.info('issue with telegram user permissions')
+        sleep(60)
     
 
 # testbot = telebot.TeleBot(API_KEY_TEST)
