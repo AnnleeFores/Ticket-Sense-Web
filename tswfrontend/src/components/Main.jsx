@@ -58,7 +58,7 @@ const Main = () => {
 
     setMovie("");
     setMoviedata([]);
-    onChange(new Date());
+    onChange("");
     setLocation([]);
     setTheater([]);
     setTheaterdata([{ value: "", label: "" }]);
