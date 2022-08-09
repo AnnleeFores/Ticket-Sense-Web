@@ -67,10 +67,6 @@ const Main = () => {
   return (
     <div className=" text-white">
       <div className="w-full h-full">
-        <h1 className="text-[#00df9a] text-5xl mt-[45px] font-bold flex justify-center ">
-          Ticket Sense
-        </h1>
-
         <form
           onSubmit={log}
           className=" max-w-[700px] mt-[80px]  flex flex-col items-center justify-center w-full mx-auto "

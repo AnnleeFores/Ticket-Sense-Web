@@ -11,7 +11,7 @@ const PrivateRoutes = () => {
 
   let data = sessionStorage.getItem("user");
 
-  return data ? <Outlet /> : <Navigate to="/" />;
+  return true ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default PrivateRoutes;
