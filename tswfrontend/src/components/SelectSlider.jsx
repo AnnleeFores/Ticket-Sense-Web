@@ -5,10 +5,18 @@ import jsonp from "jsonp";
 import axios from "axios";
 
 const SelectSlider = () => {
-  let { site, setSite, setLocation, setLocdata, setTheater, setTheaterdata } =
-    useContext(AuthContext);
+  let {
+    site,
+    setSite,
+    setLocation,
+    setLocdata,
+    setTheater,
+    setTheaterdata,
+    dateChange,
+  } = useContext(AuthContext);
 
   useEffect(() => {
+    dateChange(null);
     setLocation([]);
     setTheater([]);
     setTheaterdata([{ value: "", label: "" }]);

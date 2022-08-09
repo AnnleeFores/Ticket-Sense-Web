@@ -21,6 +21,8 @@ export const AuthProvider = ({ children }) => {
   const [theater, setTheater] = useState([]);
   const [theaterdata, setTheaterdata] = useState([{ value: "", label: "" }]);
 
+  const [date, dateChange] = useState(null);
+
   const navigate = useNavigate();
 
   const loginUser = async (responsefromtg) => {
@@ -56,6 +58,8 @@ export const AuthProvider = ({ children }) => {
     setTheater: setTheater,
     theaterdata: theaterdata,
     setTheaterdata: setTheaterdata,
+    date: date,
+    dateChange: dateChange,
   };
 
   return (

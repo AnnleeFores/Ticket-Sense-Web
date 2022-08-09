@@ -26,12 +26,12 @@ const Main = () => {
     setTheaterdata,
     theater,
     setTheater,
+    date,
+    dateChange,
   } = useContext(AuthContext);
 
-  const [value, onChange] = useState("");
-
   // convert output from calendar to date format
-  const dateFormat = dayjs(value).format("YYYY-MM-DD");
+  const dateFormat = dayjs(date).format("YYYY-MM-DD");
 
   const [user_data, setUser_data] = useState(sessionStorage.getItem("user"));
 
@@ -58,7 +58,7 @@ const Main = () => {
 
     setMovie("");
     setMoviedata([]);
-    onChange("");
+    dateChange(null);
     setLocation([]);
     setTheater([]);
     setTheaterdata([{ value: "", label: "" }]);
@@ -92,8 +92,8 @@ const Main = () => {
             size="md"
             inputFormat="DD/MM/YYYY"
             icon={<Calendar size={16} />}
-            value={value}
-            onChange={onChange}
+            value={date}
+            onChange={dateChange}
           />
 
           <button className="bg-[#00df9a] text-black rounded-md shadow-lg font-medium w-[200px] m-4 mt-8 p-3">
