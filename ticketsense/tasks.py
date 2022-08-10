@@ -47,6 +47,7 @@ def getImage(img_link):
 # remove all symbols from string and join together
 def compareRegex(movie):
     movie = re.sub(r'[^\w]', '', movie)
+    movie = re.sub(r'([a-z])\1+', r'\1', movie)
     return movie
 
 
