@@ -10,9 +10,9 @@ const Navbar = () => {
           <img src={logo} alt="Ticketsense" className="w-[40px] " />
         </Link>
         <div className="flex flex-row uppercase text-sm font-bold mr-5 md:mr-8">
-          <p className="p-3 cursor-pointer">Docs</p>
-          <p className="p-3 cursor-pointer">About</p>
-          <p className="p-3 cursor-pointer">Contact</p>
+          <p className="p-2 md:p-4 cursor-pointer">Docs</p>
+          <p className="p-2 md:p-4 cursor-pointer">About</p>
+          <p className="p-2 md:p-4 cursor-pointer">Contact</p>
         </div>
       </div>
     </div>
