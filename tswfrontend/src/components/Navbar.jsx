@@ -7,7 +7,7 @@ const Navbar = () => {
     <div>
       <div className="flex flex-row justify-between items-center mt-5 ml-5">
         <Link to="/">
-          <img src={logo} alt="Ticketsense" className="w-[40px] " />
+          <img src={logo} alt="Ticketsense" className="w-[35px] " />
         </Link>
         <div className="flex flex-row uppercase text-sm font-bold mr-5 md:mr-8">
           <p className="p-2 md:p-4 cursor-pointer">Getting Started</p>
