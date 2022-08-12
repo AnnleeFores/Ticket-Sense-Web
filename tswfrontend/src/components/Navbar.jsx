@@ -6,12 +6,19 @@ const Navbar = () => {
   return (
     <div>
       <div className="flex flex-row justify-between items-center mt-5 ml-5">
-        <Link to="/">
-          <img src={logo} alt="Ticketsense" className="w-[35px] " />
+        <Link to="/" className="flex flex-row items-center">
+          <img src={logo} alt="Ticketsense" className="w-[30px] md:w-[40px] " />
+          <p className="ml-1 md:mb-1 text-sm md:text-2xl font-semibold">
+            ticket sense
+          </p>
         </Link>
-        <div className="flex flex-row uppercase text-sm font-bold mr-5 md:mr-8">
-          <p className="p-2 md:p-4 cursor-pointer">Getting Started</p>
-          <p className="p-2 md:p-4 cursor-pointer">Contact</p>
+        <div className="flex flex-row uppercase mr-5 md:mr-8">
+          <p className="p-2 md:p-4 cursor-pointer text-sm md:text-lg font-semibold">
+            DOCS
+          </p>
+          <p className="p-2 md:p-4 cursor-pointer text-sm md:text-lg font-semibold">
+            Contact
+          </p>
         </div>
       </div>
     </div>
