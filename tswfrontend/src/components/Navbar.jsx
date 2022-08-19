@@ -7,8 +7,8 @@ const Navbar = () => {
     <div>
       <div className="flex flex-row justify-between items-center mt-5 ml-5">
         <Link to="/" className="flex flex-row items-center">
-          <img src={logo} alt="Ticketsense" className="w-[30px] md:w-[40px] " />
-          <p className="ml-1 md:mb-1 text-sm md:text-2xl font-semibold">
+          <img src={logo} alt="Ticketsense" className="w-[35px] md:w-[40px] " />
+          <p className="ml-1 md:mb-1 text-lg md:text-2xl font-semibold">
             ticket sense
           </p>
         </Link>
