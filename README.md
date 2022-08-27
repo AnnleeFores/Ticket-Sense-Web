@@ -10,6 +10,6 @@ Backend: Django, Django REST framework, Celery, Scrapy, ScrapyRT, Redis, pyTeleg
 
 Frontend: React, Mantine UI
 
-Deployed on DigitalOcean Droplet with CapRover
+Deployed on DigitalOcean Droplet with CapRover (Backend) and Vercel (frontend)
 
 _Detailed README coming soon_
