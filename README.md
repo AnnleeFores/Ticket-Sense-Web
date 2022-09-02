@@ -1,8 +1,9 @@
 # [Ticket Sense](https://ticketsense.annleefores.com/)
 
 A web app to get notified about ticket sales at your preferred theater before anyone else.
-
 Currently works only in theaters listed on BookMyShow and TicketNew
+
+
 ---
 
 ### Made with
