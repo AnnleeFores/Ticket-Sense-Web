@@ -64,6 +64,12 @@ def index(request):
             'body': None,
             'description': 'API endpoint to get theater details for ticketnew based on location'
         },
+        {
+            'Endpoint': 'api/bms/<str:location>/',
+            'method': 'GET',
+            'body': None,
+            'description': 'API proxy endpoint to get theater details for bookmyshow based on location'
+        },
      
     ]
     
