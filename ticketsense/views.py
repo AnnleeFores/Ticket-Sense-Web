@@ -62,12 +62,7 @@ def index(request):
             'body': None,
             'description': 'API endpoint to get theater details for ticketnew based on location'
         },
-        {
-            'Endpoint': 'api/bms/<str:location>/',
-            'method': 'GET',
-            'body': None,
-            'description': 'API proxy endpoint to get theater details for bookmyshow based on location'
-        },
+     
     ]
     
     # for testing purposes only # add a monthly cron job to run this later
@@ -81,6 +76,8 @@ def verifyUser(request):
 
     if request.method == 'POST':
         data = request.data
+
+        print(data)
 
         try:
             verification =  verify_telegram_authentication(BOT_TOKEN, data)
@@ -210,9 +207,3 @@ def tktnew_theatre(request, location):
     except:
         return JsonResponse({'error':'No data'})
 
-# helps with CORS error when communicating directly with the server from client side
-@api_view(['GET'])
-def bms_theatre(request, location):
-    response = (requests.get(f'https://in.bookmyshow.com/pwa/api/de/venues?regionCode={location}&eventType=MT')).json()   
-    return Response(response)
-    

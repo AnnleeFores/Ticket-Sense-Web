@@ -191,7 +191,9 @@ CORS_ALLOWED_ORIGINS = [
     "https://ticketsense.annleefores.com",
     "http://localhost",
     "http://localhost:41949",
-    'https://52fc-117-217-135-237.in.ngrok.io',
+    'http://localhost:3000',
+    'https://tsw-frontend.vercel.app',
+    'https://d413-61-1-192-109.in.ngrok.io'
 ]
 
 
