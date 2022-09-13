@@ -8,10 +8,12 @@ from .tasks import daily_func, get_tktnew_data
 import requests
 import re
 from .telegram_auth_check import verify_telegram_authentication
+import cloudscraper
 
 import os
 
 from dotenv import load_dotenv
+scraper = cloudscraper.create_scraper()
 
 
 load_dotenv()
@@ -207,3 +209,7 @@ def tktnew_theatre(request, location):
     except:
         return JsonResponse({'error':'No data'})
 
+@api_view(['GET'])
+def bms_theatre(request, location):
+    response = (scraper.get(f'https://in.bookmyshow.com/pwa/api/de/venues?regionCode={location}&eventType=MT')).json()   
+    return Response(response)
