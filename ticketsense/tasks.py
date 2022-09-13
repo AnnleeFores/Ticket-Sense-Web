@@ -2,12 +2,13 @@ from codecs import ignore_errors
 from celery import shared_task
 from celery.utils.log import get_task_logger
 import requests
+import cloudscraper
 from .models import Trigger, TktnewData
 from dateutil import parser
 
 # for jsonp
 from json import loads
-
+scraper = cloudscraper.create_scraper()
 
 # os module used for getting env variables
 import os
@@ -158,7 +159,7 @@ def fetch(link, filmkeyword, date, site, pk, USER_ID, poster, venuecode):
     else:
         date = re.sub(r'[^\w]', '', date)
         
-        response = (requests.get(f'https://in.bookmyshow.com/api/v2/mobile/showtimes/byvenue?venueCode={venuecode}&dateCode={date}').json())
+        response = (scraper.get(f'https://in.bookmyshow.com/api/v2/mobile/showtimes/byvenue?venueCode={venuecode}&dateCode={date}').json())
         try:
             bmsdata = response
         except:
