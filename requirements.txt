@@ -42,7 +42,6 @@ lxml==4.9.1
 packaging==21.3
 parsel==1.6.0
 Pillow==9.2.0
-playwright==1.24.1
 prometheus-client==0.14.1
 prompt-toolkit==3.0.30
 Protego==0.2.1
@@ -65,7 +64,6 @@ requests==2.28.1
 requests-file==1.5.1
 requests-toolbelt==0.9.1
 Scrapy==2.6.2
-scrapy-playwright==0.0.20
 scrapyrt==0.13.0
 service-identity==21.1.0
 six==1.16.0
