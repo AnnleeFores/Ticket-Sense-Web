@@ -27,7 +27,7 @@ django-environ==0.9.0
 django-timezone-field==5.0
 djangorestframework==3.13.1
 filelock==3.7.1
-flower==1.1.0
+flower==1.2.0
 greenlet==1.1.2
 gunicorn==20.1.0
 humanize==4.2.3
