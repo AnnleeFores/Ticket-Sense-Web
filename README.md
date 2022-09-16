@@ -7,9 +7,9 @@ Currently works only in theaters listed on BookMyShow and TicketNew
 
 ### Made with
 
-Backend: Django, Django REST framework, Celery, Scrapy, ScrapyRT, Redis, pyTelegramBotAPI, PostgreSQL
+[Backend](https://github.com/AnnleeFores/Ticket-Sense-Web): Django, Django REST framework, Celery, Scrapy, ScrapyRT, Redis, pyTelegramBotAPI, PostgreSQL
 
-[Frontend](https://github.com/AnnleeFores/Ticket-Sense-Web-Frontend) : React, Mantine UI, Tailwind CSS
+[Frontend](https://github.com/AnnleeFores/Ticket-Sense-Web-Frontend): React, Mantine UI, Tailwind CSS
 
 Deployed on DigitalOcean Droplet with CapRover (Backend) and Vercel (frontend)
 
