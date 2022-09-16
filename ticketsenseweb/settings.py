@@ -193,7 +193,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:41949",
     'http://localhost:3000',
     'https://tsw-frontend.vercel.app',
-    'https://d413-61-1-192-109.in.ngrok.io'
 ]
 
 
