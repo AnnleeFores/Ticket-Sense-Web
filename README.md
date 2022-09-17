@@ -19,14 +19,6 @@ Currently works only with theaters listed on BookMyShow and TicketNew
 #### Usage
 
 ```
-python3 -m venv venv
-```
-
-```
-source venv/bin/activate
-```
-
-```
 redis-server
 ```
 
