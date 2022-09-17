@@ -190,7 +190,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://ticket-sense-web.vercel.app",
     "https://ticketsense.annleefores.com",
     "http://localhost",
-    "http://localhost:41949",
     'http://localhost:3000',
     'https://tsw-frontend.vercel.app',
 ]
