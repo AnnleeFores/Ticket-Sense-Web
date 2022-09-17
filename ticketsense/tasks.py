@@ -76,7 +76,7 @@ def message(msg, pk, USER_ID, poster):
         trigger = Trigger.objects.get(id=pk)
         trigger.delete()
     except:
-        logger.info(f'''data doesn't exit''')
+        logger.info(f'''delete from DB - data doesn't exist''')
 
     # try:
     #     if not poster:
