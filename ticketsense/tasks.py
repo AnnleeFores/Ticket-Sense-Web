@@ -190,10 +190,7 @@ def fetch(link, filmkeyword, date, site, pk, USER_ID, poster, venuecode):
                 # get the shortest string (min) and longest string (max)
                 min_val = min(filmkeyword_val, film_val , key=len)
                 max_val = max(filmkeyword_val, film_val , key=len)
-                logger.info(filmkeyword_val)
-                logger.info(film_val)
-                logger.info(min_val)
-                logger.info(max_val)
+         
                 if min_val in max_val :
                     date = bmsdata['ShowDetails'][0]['Date']
                     venue = bmsdata['ShowDetails'][0]['Venues']['VenueName']
