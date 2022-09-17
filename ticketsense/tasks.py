@@ -185,8 +185,6 @@ def fetch(link, filmkeyword, date, site, pk, USER_ID, poster, venuecode):
             for films in bmsdata['ShowDetails'][0]['Event']:
                 film = films['ChildEvents'][0]['EventName']
                 
-                
-                
                 #normalizes accented character to english and then regex strips down repeating letters. # get the shortest string (min) and longest string (max)
                 if compareRegex(strip_accents(min(filmkeyword, film.lower() , key=len))) in compareRegex(strip_accents(max_str = min(filmkeyword, film.lower() , key=len))):
                     date = bmsdata['ShowDetails'][0]['Date']
