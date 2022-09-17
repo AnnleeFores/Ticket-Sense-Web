@@ -8,7 +8,7 @@ Currently works only with theaters listed on BookMyShow and TicketNew
 
 ---
 
-#### Made with
+### Made with
 
 [Backend](https://github.com/AnnleeFores/Ticket-Sense-Web): Django, Django REST framework, Celery, Scrapy, ScrapyRT, Redis, pyTelegramBotAPI, PostgreSQL, Cloudscraper
 
@@ -16,15 +16,21 @@ Currently works only with theaters listed on BookMyShow and TicketNew
 
 ---
 
-#### Usage
+### Usage
+
+Redis serber
 
 ```
 redis-server
 ```
 
+Django application
+
 ```
 cd ticketsenseweb && python3 manage.py makemigrations && python3 manage.py runserver
 ```
+
+Celery
 
 ```
 celery -A ticketsenseweb.celery beat -l INFO
@@ -33,6 +39,8 @@ celery -A ticketsenseweb.celery beat -l INFO
 ```
 celery -A ticketsenseweb worker -l info -n a1
 ```
+
+Scrapy
 
 ```
 cd scrapsense && scrapyrt
