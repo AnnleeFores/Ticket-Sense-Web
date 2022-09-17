@@ -62,6 +62,7 @@ def strip_accents(text):
 
 # remove all symbols from string and join together
 def compareRegex(movie):
+    movie = re.sub(r'\(U\)', '', movie) #remove (U) from film title
     movie = re.sub(r'[^\w]', '', movie)
     movie = re.sub(r'([a-z])\1+', r'\1', movie)
     return movie
