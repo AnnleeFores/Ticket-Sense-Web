@@ -24,6 +24,8 @@ import urllib.request
 
 import re
 
+import unicodedata
+
 
 logger = get_task_logger(__name__)
 
@@ -43,6 +45,19 @@ def getImage(img_link):
     with urllib.request.urlopen(URL) as url:
         img = Image.open(url)
     return img
+
+def strip_accents(text):
+    """
+    Strip accents from input String.
+    """
+    try:
+        text = str(text, 'utf-8')
+    except (TypeError, NameError): # unicode is a default on python 3 
+        pass
+    text = unicodedata.normalize('NFD', text)
+    text = text.encode('ascii', 'ignore')
+    text = text.decode("utf-8")
+    return str(text)
 
 
 # remove all symbols from string and join together
@@ -168,7 +183,8 @@ def fetch(link, filmkeyword, date, site, pk, USER_ID, poster, venuecode):
         if bmsdata['ShowDetails'][0]['Date'] == date and bmsdata != '':
             for films in bmsdata['ShowDetails'][0]['Event']:
                 film = films['ChildEvents'][0]['EventName']
-                if compareRegex(filmkeyword) in compareRegex(film.lower()):
+                #normalizes accented character to english and then regex strips down repeating letters
+                if compareRegex(strip_accents(filmkeyword)) in compareRegex(strip_accents(film.lower())):
                     date = bmsdata['ShowDetails'][0]['Date']
                     venue = bmsdata['ShowDetails'][0]['Venues']['VenueName']
                     jsondata = {'venue':venue, 'show':film, 'date':date}
