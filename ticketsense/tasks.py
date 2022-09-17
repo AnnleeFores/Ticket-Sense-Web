@@ -184,11 +184,11 @@ def fetch(link, filmkeyword, date, site, pk, USER_ID, poster, venuecode):
         if bmsdata['ShowDetails'][0]['Date'] == date and bmsdata != '':
             for films in bmsdata['ShowDetails'][0]['Event']:
                 film = films['ChildEvents'][0]['EventName']
-                # get the shortest string (min) and longest string (max)
-                min_str = min(filmkeyword, film.lower() , key=len)
-                max_str = min(filmkeyword, film.lower() , key=len)
-                #normalizes accented character to english and then regex strips down repeating letters
-                if compareRegex(strip_accents(min_str)) in compareRegex(strip_accents(max_str)):
+                
+                
+                
+                #normalizes accented character to english and then regex strips down repeating letters. # get the shortest string (min) and longest string (max)
+                if compareRegex(strip_accents(min(filmkeyword, film.lower() , key=len))) in compareRegex(strip_accents(max_str = min(filmkeyword, film.lower() , key=len))):
                     date = bmsdata['ShowDetails'][0]['Date']
                     venue = bmsdata['ShowDetails'][0]['Venues']['VenueName']
                     jsondata = {'venue':venue, 'show':film, 'date':date}
