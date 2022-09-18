@@ -1,16 +1,18 @@
 import scrapy
 from dateutil import parser
-import re
+from thefuzz import fuzz
+import os
+import sys
 
+path = os.getcwd()
+sys.path.append(os.path.dirname(path)) # add working dir to path
 
-# remove all symbols from string and join together
-def compareRegex(movie):
-    movie = re.sub(r'[^\w]', '', movie)
-    movie = re.sub(r'([a-z])\1+', r'\1', movie)
-    return movie
+from stringMatching import stripDown
+
 
 # spider for ticketnew websited
 class tkSpider(scrapy.Spider):
+
     name = 'tk'
     
     def start_requests(self):
@@ -34,7 +36,11 @@ class tkSpider(scrapy.Spider):
             DT = (parser.parse(date)).strftime('%Y-%m-%d')
             for show in response.css('div.tn-entity-details')[1:]:
                 showname = show.css('h5::text').get()
-                if compareRegex(film) in compareRegex(showname.lower()):
+                filmkeyword_val = stripDown(film)
+                film_val = stripDown(showname.lower())
+                fuzz_value = fuzz.token_set_ratio(filmkeyword_val, film_val)
+                print(fuzz_value)
+                if fuzz_value >= 65:  # a threshold value based on Levenshtein distance comparison of 2 strings. Make changes to threshold value to work as you needed
                     yield {
                         'venue' : venuehtml.css('h2::text').get(),
                         'show' : showname,

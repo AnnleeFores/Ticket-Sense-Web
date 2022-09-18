@@ -5,6 +5,7 @@ import requests
 import cloudscraper
 from .models import Trigger, TktnewData
 from dateutil import parser
+from thefuzz import fuzz
 
 # for jsonp
 from json import loads
@@ -21,11 +22,14 @@ from time import sleep
 
 from PIL import Image
 import urllib.request
-
 import re
 
-import unicodedata
+import os
+import sys
 
+from stringMatching import stripDown
+
+sys.path.append(os.getcwd()) # add working dir to path
 
 logger = get_task_logger(__name__)
 
@@ -46,26 +50,10 @@ def getImage(img_link):
         img = Image.open(url)
     return img
 
-def strip_accents(text):
-    """
-    Strip accents from input String.
-    """
-    try:
-        text = str(text, 'utf-8')
-    except (TypeError, NameError): # unicode is a default on python 3 
-        pass
-    text = unicodedata.normalize('NFD', text)
-    text = text.encode('ascii', 'ignore')
-    text = text.decode("utf-8")
-    return str(text)
 
 
-# remove all symbols from string and join together
-def compareRegex(movie):
-    movie = re.sub(r'\(U\)', '', movie) #remove (U) from film title
-    movie = re.sub(r'[^\w]', '', movie)
-    movie = re.sub(r'([a-z])\1+', r'\1', movie)
-    return movie
+
+
 
 
 # code to initialize telegram bot function
@@ -78,23 +66,23 @@ def message(msg, pk, USER_ID, poster):
     except:
         logger.info(f'''delete from DB - data doesn't exist''')
 
-    # try:
-    #     if not poster:
-    #         bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
-    #     else:
-    #         bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
-    # except:
-    #     logger.info('issue with telegram user permissions')
+    try:
+        if not poster:
+            bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
+        else:
+            bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
+    except:
+        logger.info('issue with telegram user permissions')
     
-    for i in range(3):
-        try:
-            if not poster:
-                bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
-            else:
-                bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
-        except:
-            logger.info('issue with telegram user permissions')
-        sleep(60)
+    # for i in range(3):
+    #     try:
+    #         if not poster:
+    #             bot.send_message(USER_ID, msg, parse_mode= 'Markdown')
+    #         else:
+    #             bot.send_photo(USER_ID, getImage(poster), msg, parse_mode= 'Markdown')
+    #     except:
+    #         logger.info('issue with telegram user permissions')
+    #     sleep(60)
     
 
 # testbot = telebot.TeleBot(API_KEY_TEST)
@@ -184,14 +172,14 @@ def fetch(link, filmkeyword, date, site, pk, USER_ID, poster, venuecode):
         if bmsdata['ShowDetails'][0]['Date'] == date and bmsdata != '':
             for films in bmsdata['ShowDetails'][0]['Event']:
                 film = films['ChildEvents'][0]['EventName']
-                #normalizes accented character to english and then regex strips down repeating letters. 
-                filmkeyword_val = compareRegex(strip_accents(filmkeyword))
-                film_val = compareRegex(strip_accents(film.lower()))
-                # get the shortest string (min) and longest string (max)
-                min_val = min(filmkeyword_val, film_val , key=len)
-                max_val = max(filmkeyword_val, film_val , key=len)
+                 
+                filmkeyword_val = stripDown(filmkeyword)
+                film_val = stripDown(film.lower())
+
+                fuzz_value = fuzz.token_set_ratio(filmkeyword_val, film_val)
+                logger.info(fuzz_value)
          
-                if min_val in max_val :
+                if fuzz_value >= 65:  # a threshold value based on Levenshtein distance comparison of 2 strings. Make changes to threshold value to work as you needed
                     date = bmsdata['ShowDetails'][0]['Date']
                     venue = bmsdata['ShowDetails'][0]['Venues']['VenueName']
                     jsondata = {'venue':venue, 'show':film, 'date':date}

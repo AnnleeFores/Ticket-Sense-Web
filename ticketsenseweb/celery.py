@@ -20,7 +20,7 @@ app.conf.timezone = 'Asia/Kolkata'
 app.conf.beat_schedule = {
     "ticketsensebgtask": {
         "task": "ticketsense.tasks.five_min_func",
-        "schedule": timedelta(seconds=300),
+        "schedule": timedelta(seconds=60),
     },
 }
 
