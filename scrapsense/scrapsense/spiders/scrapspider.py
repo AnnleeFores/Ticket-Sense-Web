@@ -4,11 +4,15 @@ from thefuzz import fuzz
 import os
 import sys
 
+# Local
+# path = os.getcwd()
+# sys.path.append(os.path.dirname(path)) # add working dir to path
+
+# Prod
 path = os.getcwd()
-sys.path.append(os.path.dirname(path)) # add working dir to path
+sys.path.append((path)) # add working dir to path
 
 from stringMatching import stripDown
-
 
 # spider for ticketnew websited
 class tkSpider(scrapy.Spider):
