@@ -14,7 +14,7 @@ Currently works only with theaters listed on BookMyShow and TicketNew
 
 [Frontend](https://github.com/AnnleeFores/Ticket-Sense-Web-Frontend): Next.js, Mantine UI, Tailwind CSS
 
-Frontend deployed on Vercel
+Frontend deployed on Vercel \
 Backend deployed on DigitalOcean droplet
 
 
