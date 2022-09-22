@@ -16,6 +16,8 @@ Currently works only with theaters listed on BookMyShow and TicketNew
 
 Frontend deployed on Vercel
 Backend deployed on DigitalOcean droplet
+
+
 ---
 
 ### Usage
