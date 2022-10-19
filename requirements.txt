@@ -53,7 +53,7 @@ PyDispatcher==2.0.5
 pyee==8.1.0
 pyOpenSSL==22.0.0
 pyparsing==3.0.9
-pyTelegramBotAPI==4.6.1
+pyTelegramBotAPI==4.7.0
 python-crontab==2.6.0
 python-dateutil==2.8.2
 python-dotenv==0.20.0
