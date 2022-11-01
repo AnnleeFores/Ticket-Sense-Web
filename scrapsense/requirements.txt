@@ -32,7 +32,7 @@ scrapyrt==0.13.0
 service-identity==21.1.0
 six==1.16.0
 tldextract==3.3.1
-Twisted==22.4.0
+Twisted==22.10.0
 typing-extensions==4.3.0
 urllib3==1.26.11
 w3lib==1.22.0

@@ -70,7 +70,7 @@ six==1.16.0
 sqlparse==0.4.2
 tldextract==3.3.1
 tornado==6.2
-Twisted==22.4.0
+Twisted==22.10.0
 typing-extensions==4.3.0
 tzdata==2022.1
 urllib3==1.26.11
