@@ -73,7 +73,7 @@ def index(request):
     ]
 
     # for testing purposes only #store data of all ticketnew theaters in database # add a monthly cron job to run this later
-    daily_func.delay()
+    # daily_func.delay()
 
     return Response(routes)
 
