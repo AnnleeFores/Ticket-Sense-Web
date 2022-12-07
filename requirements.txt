@@ -15,7 +15,7 @@ click-plugins==1.1.1
 click-repl==0.2.0
 cloudscraper==1.2.64
 constantly==15.1.0
-cryptography==37.0.4
+cryptography==38.0.3
 cssselect==1.1.0
 Deprecated==1.2.13
 dj-database-url==1.0.0
@@ -41,7 +41,7 @@ kombu==5.2.4
 lxml==4.9.1
 packaging==21.3
 parsel==1.6.0
-Pillow==9.2.0
+Pillow==9.3.0
 prometheus-client==0.14.1
 prompt-toolkit==3.0.30
 Protego==0.2.1
@@ -63,14 +63,14 @@ redis==4.3.4
 requests==2.28.1
 requests-file==1.5.1
 requests-toolbelt==0.9.1
-Scrapy==2.6.3
+Scrapy==2.7.1
 scrapyrt==0.13.0
 service-identity==21.1.0
 six==1.16.0
 sqlparse==0.4.2
 tldextract==3.3.1
 tornado==6.2
-Twisted==22.4.0
+Twisted==22.10.0
 typing-extensions==4.3.0
 tzdata==2022.1
 urllib3==1.26.11
