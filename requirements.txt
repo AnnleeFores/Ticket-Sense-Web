@@ -63,7 +63,7 @@ redis==4.3.4
 requests==2.28.1
 requests-file==1.5.1
 requests-toolbelt==0.9.1
-Scrapy==2.7.1
+Scrapy==2.8.0
 scrapyrt==0.13.0
 service-identity==21.1.0
 six==1.16.0
