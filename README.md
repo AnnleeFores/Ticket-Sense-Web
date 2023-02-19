@@ -22,7 +22,7 @@ Backend deployed on DigitalOcean droplet
 
 ### Usage
 
-Redis serber
+Redis server
 
 ```
 redis-server
