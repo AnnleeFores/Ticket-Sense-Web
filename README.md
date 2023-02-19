@@ -10,9 +10,9 @@ Currently works only with theaters listed on BookMyShow and TicketNew
 
 ### Made with
 
-[Backend](https://github.com/AnnleeFores/Ticket-Sense-Web): Django, Django REST framework, Celery, Scrapy, ScrapyRT, Redis, pyTelegramBotAPI, PostgreSQL, Cloudscraper
+[Backend](https://github.com/annleefores/Ticket-Sense-Web): Django, Django REST framework, Celery, Scrapy, ScrapyRT, Redis, pyTelegramBotAPI, PostgreSQL, Cloudscraper
 
-[Frontend](https://github.com/AnnleeFores/Ticket-Sense-Web-Frontend): Next.js, Mantine UI, Tailwind CSS
+[Frontend](https://github.com/annleefores/Ticket-Sense-Web-Frontend): Next.js, Mantine UI, Tailwind CSS
 
 Frontend deployed on Vercel \
 Backend deployed on DigitalOcean droplet
@@ -22,7 +22,7 @@ Backend deployed on DigitalOcean droplet
 
 ### Usage
 
-Redis serber
+Redis server
 
 ```
 redis-server
