@@ -67,7 +67,7 @@ Scrapy==2.8.0
 scrapyrt==0.13.0
 service-identity==21.1.0
 six==1.16.0
-sqlparse==0.4.2
+sqlparse==0.4.4
 tldextract==3.3.1
 tornado==6.2
 Twisted==22.10.0
