@@ -22,6 +22,7 @@ Currently, Ticket Sense works exclusively with theaters listed on BookMyShow and
 - Celery 
 - Scrapy & ScrapyRT 
 - Redis 
+- TMDB API
 - pyTelegramBotAPI 
 - PostgreSQL 
 - Cloudscraper
