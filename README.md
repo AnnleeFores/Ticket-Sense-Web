@@ -1,51 +1,86 @@
-# [Ticket Sense](https://ticketsense.annleefores.com/)
+# [Ticket Sense](https://ticketsense.app/)
 
-A web app to get notified about ticket sales at your preferred theater before anyone else.
+Ticket Sense is a web application designed to provide early notifications about ticket sales at your preferred theater. With Ticket Sense, you can stay ahead of the crowd and secure your tickets before anyone else.
 
-Works by periodically crawling through site to collect required data.
+## Key Features
+- **Early Ticket Notifications**: Ticket Sense periodically scans through supported theater websites, such as BookMyShow and TicketNew, to collect the necessary data. This ensures that you receive timely notifications as soon as ticket sales begin.
 
-Currently works only with theaters listed on BookMyShow and TicketNew
+- **Customized Theater Preferences**: You can set your preferred theater(s) within the application. Ticket Sense will specifically monitor those theaters and notify you about upcoming ticket sales, ensuring you never miss out on your favorite shows.
 
----
 
-### Made with
+## Supported Theaters
 
-[Backend](https://github.com/annleefores/Ticket-Sense-Web): Django, Django REST framework, Celery, Scrapy, ScrapyRT, Redis, pyTelegramBotAPI, PostgreSQL, Cloudscraper
-
-[Frontend](https://github.com/annleefores/Ticket-Sense-Web-Frontend): Next.js, Mantine UI, Tailwind CSS
-
-Frontend deployed on Vercel \
-Backend deployed on DigitalOcean droplet
-
+Currently, Ticket Sense works exclusively with theaters listed on BookMyShow and TicketNew. These platforms cover a wide range of theaters and events, ensuring comprehensive coverage for most popular movies and shows.
 
 ---
 
-### Usage
+## Technologies Used
 
-Redis server
+[Backend](https://github.com/annleefores/Ticket-Sense-Web): 
+- Django
+- Django REST framework 
+- Celery 
+- Scrapy & ScrapyRT 
+- Redis 
+- pyTelegramBotAPI 
+- PostgreSQL 
+- Cloudscraper
+
+Deployed on DigitalOcean droplet
+
+[Frontend](https://github.com/annleefores/Ticket-Sense-Web-Frontend): 
+- Next.js 
+- Mantine UI 
+- Tailwind CSS
+
+Deployed on Vercel 
+
+---
+
+## Get Started
+
+To get started with Ticket Sense, follow these steps:
+
+1. Clone the repository:
+
+```
+git clone https://github.com/annleefores/Ticket-Sense-Web.git
+```
+
+2. Install the required dependencies:
+
+```
+pip install -r requirements.txt
+```
+
+3. Redis server
 
 ```
 redis-server
 ```
 
-Django application
+4. Django application
 
 ```
-cd ticketsenseweb && python3 manage.py makemigrations && python3 manage.py runserver
+cd Ticket Senseweb && python3 manage.py makemigrations && python3 manage.py runserver
 ```
 
-Celery
+5. Celery
 
 ```
-celery -A ticketsenseweb.celery beat -l INFO
+celery -A Ticket Senseweb.celery beat -l INFO
 ```
 
 ```
-celery -A ticketsenseweb worker -l info -n a1
+celery -A Ticket Senseweb worker -l info -n a1
 ```
 
-Scrapy
+6. Scrapy
 
 ```
 cd scrapsense && scrapyrt
 ```
+
+## Contribution
+
+If you would like to contribute to Ticket Sense, feel free to submit pull requests or open issues on the GitHub repository. Your contributions are highly appreciated and will help enhance the functionality and usability of the application.
