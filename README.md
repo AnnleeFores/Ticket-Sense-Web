@@ -16,7 +16,7 @@ Currently, Ticket Sense works exclusively with theaters listed on BookMyShow and
 
 ## Technologies Used
 
-[Backend](https://github.com/annleefores/Ticket-Sense-Web): 
+**[Backend](https://github.com/annleefores/Ticket-Sense-Web)**: 
 - Django
 - Django REST framework 
 - Celery 
@@ -29,7 +29,7 @@ Currently, Ticket Sense works exclusively with theaters listed on BookMyShow and
 
 Deployed on DigitalOcean droplet
 
-[Frontend](https://github.com/annleefores/Ticket-Sense-Web-Frontend): 
+**[Frontend](https://github.com/annleefores/Ticket-Sense-Web-Frontend)**: 
 - Next.js 
 - Mantine UI 
 - Tailwind CSS
