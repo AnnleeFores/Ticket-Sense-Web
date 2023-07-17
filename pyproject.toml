@@ -21,6 +21,8 @@ django-celery-results = "^2.5.1"
 flower = "^2.0.0"
 django-environ = "^0.10.0"
 redis = "^4.6.0"
+whitenoise = "^6.5.0"
+cloudscraper = "^1.2.71"
 
 
 [build-system]
