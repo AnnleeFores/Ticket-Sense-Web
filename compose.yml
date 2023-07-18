@@ -1,12 +1,25 @@
 services:
+  backend-django:
+    env_file:
+      - .env
+    image: "backend-django"
+    container_name: "backend-django"
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/usr/src/app
+
   redis:
     image: redis:6.2-alpine
+    container_name: "redis"
     restart: always
     ports:
       - "6379:6379"
 
   db:
     image: postgres:13-alpine
+    container_name: "psql-db"
     restart: always
     environment:
       - POSTGRES_USER=postgres
