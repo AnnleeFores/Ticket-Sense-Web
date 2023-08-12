@@ -25,7 +25,7 @@ pyee==8.1.0
 pyOpenSSL==22.0.0
 python-dateutil==2.8.2
 queuelib==1.6.2
-requests==2.28.1
+requests==2.31.0
 requests-file==1.5.1
 Scrapy==2.8.0
 scrapyrt==0.13.0
