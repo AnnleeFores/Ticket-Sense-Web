@@ -2,7 +2,7 @@
 name = "ticket-sense-web"
 version = "0.1.0"
 description = ""
-authors = ["annleefores <annleefores@gmail.com>"]
+authors = ["annleefores <annleetestmail@gmail.com>"]
 readme = "README.md"
 packages = [{include = "ticket_sense_web"}]
 
