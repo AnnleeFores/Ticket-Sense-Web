@@ -24,7 +24,7 @@ redis = "^4.6.0"
 whitenoise = "^6.5.0"
 cloudscraper = "^1.2.71"
 thefuzz = "^0.19.0"
-pillow = "^10.0.0"
+pillow = "^10.0.1"
 python-levenshtein = "^0.21.1"
 psycopg2-binary = "^2.9.6"
 
